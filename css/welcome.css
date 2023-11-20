@@ -1,10 +1,10 @@
 :root{  
-    --bg-color: #000;
+    --bg-color: #000000;
     --second-bg-color: #343a40;
     --text-color: #fff;
     --text-color2: rgba(197, 196, 196, 0.748);
-    --main-color: #fd7e14;
-    --glass-color: rgba(255, 255, 255, 0.135);
+    --main-color: #ff8b13;
+    --glass-color: rgba(108, 108, 108, 0.135);
 
     --font-family: 'Fredoka', sans-serif;;
     --box-shadow: 0 1em 3em 0.4em rgba(0, 0, 0, 0.193);
@@ -15,8 +15,9 @@ html{
     scroll-behavior: smooth;
 }
 
+
 body{
-    background-color: var(--bg-color);
+    background-image: linear-gradient(135deg, var(--second-bg-color), var(--bg-color));
     color: var(--text-color);
     font-family: var(--font-family);
     width: 80%;
@@ -84,7 +85,7 @@ hr{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    gap: 2em;
+    gap: 1.3em;
     flex-wrap: wrap;
     padding: 3em;   
 }
@@ -147,18 +148,6 @@ hr{
     box-shadow: var(--box-shadow);
     width: 25em;
 }
-.news-section > .news-cards > .news-card:nth-child(1){
-    flex-basis: 100%;
-}
-
-.news-section > .news-cards > .news-card:nth-child(2){
-    flex-basis: 45%;
-}
-
-.news-section > .news-cards > .news-card:nth-child(3){
-    flex-basis: 50%;
-}
-
 
 .news-section > .news-cards > .news-card > .top > img{
     width: 100%;
