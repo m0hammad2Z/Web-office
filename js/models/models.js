@@ -1,4 +1,4 @@
-export function User(id, role, firstName, lastName, email, password, hiringDate, birthDate, imgURl){
+export function User(id, role, firstName, lastName, email, password, hiringDate, birthDate, imgURl, mobile){
     this.id = id;
     this.role = role;
     this.firstName = firstName;
@@ -8,6 +8,7 @@ export function User(id, role, firstName, lastName, email, password, hiringDate,
     this.hiringDate = hiringDate;
     this.birthDate = birthDate;
     this.imgURl = imgURl;
+    this.mobile = mobile;
 
     this.getFullName = function(){
         return `${this.firstName} ${this.lastName}`;
