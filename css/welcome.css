@@ -90,6 +90,12 @@ hr{
     padding: 3em;   
 }
 
+.cards > div:hover{
+    transform: scale(1.05);
+    transition: all 0.5s;
+    border: 0.2em solid var(--main-color);
+}
+
 /* Statistic Section */
 .statistic-section > .statistic-cards > .statistic-card{
     display: flex;
