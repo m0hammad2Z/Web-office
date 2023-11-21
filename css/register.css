@@ -20,7 +20,17 @@
             justify-content: center;
             min-height: 100vh;
         }
-
+        input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            border: 1px solid #ffffff;
+            color: #080710;
+            font-size: 16.5px;
+          }
+          
+          input:hover {
+            cursor: pointer;
+          }
         .background {
             width: 430px;
             height: 620px;

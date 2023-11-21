@@ -75,6 +75,7 @@ form * {
   outline: none;
   border: none;
   margin-top: 20px;
+  transition: all 0.3s ease;
 }
 
 form h3 {
@@ -102,6 +103,21 @@ input {
   font-size: 14px;
   font-weight: 300;
   color: #ffffff;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  border: 1px solid transparent;
+}
+
+input:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  border: 1px solid #ffffff;
+  color: #080710;
+  font-size: 19px;
+}
+
+input:hover {
+  cursor: pointer;
 }
 
 ::placeholder {
@@ -118,6 +134,7 @@ button {
   font-weight: 600;
   border-radius: 5px;
   cursor: pointer;
+  transition: opacity 0.3s;
 }
 
 button:hover {
