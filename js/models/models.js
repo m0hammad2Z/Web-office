@@ -54,13 +54,14 @@ export function Feedback(student_id, title, description, createdBy){
     }
 }
 
-export function Student(id, firstName, lastName, email, password, birthDate, mobile, imgUrl){
+export function Student(id, firstName, lastName, email, password, birthDate, team_leader_id, mobile, imgUrl){
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
     this.birthDate = birthDate;
+    this.team_leader_id = team_leader_id;
     this.mobile = mobile;
     this.imgUrl = imgUrl;
 
@@ -80,7 +81,6 @@ export function Student(id, firstName, lastName, email, password, birthDate, mob
         general.students[index] = this;
         general.WriteOnlocalStorage(general.keysObj.students, JSON.stringify(general.students));
     }
-
 }
 
 export function Todo(student_id, title, description, createdBy){

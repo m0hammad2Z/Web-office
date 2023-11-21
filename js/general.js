@@ -21,7 +21,7 @@ let keysObj = {
     news: "news"
 }
 
-export let roles = {
+let roles = {
     admin: 'admin',
     trainer : 'trainer',
     student: 'student'
