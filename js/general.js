@@ -21,6 +21,12 @@ let keysObj = {
     news: "news"
 }
 
+export let roles = {
+    admin: 'admin',
+    trainer : 'trainer',
+    student: 'student'
+}
+
 
 let users = [];
 let students = [];
@@ -31,4 +37,4 @@ let news = [];
 
 
 
-export let general = { ReadJson, WriteOnlocalStorage, ReadFromlocalStorage, users, students, announcements, todos, feedbacks, news, keysObj};
+export let general = { ReadJson, WriteOnlocalStorage, ReadFromlocalStorage, roles, users, students, announcements, todos, feedbacks, news, keysObj};
