@@ -1,15 +1,110 @@
-:root{  
-    --bg-color: #000;
-    --second-bg-color: #343a40;
-    --text-color: #fff;
-    --text-color2: rgba(255, 255, 255, 0.756)fac;
-    --main-color: #fd7e14;
 
-    --font-family1:  'Roboto', sans-serif;
-    --box-shadow: 0 0.25em 2em rgba(0, 0, 0, 0.1);
-    --boder-radiues: 1em;
+:root {
+  --bg-color: #132043;
+  --second-bg-color: #2b3467;
+  --text-color: #fcffe7;
+  --main-color: #fedb39;
+  --box-shadow: 0 0.25em 2em rgba(0, 0, 0, 0.1);
+  --border-radius: 1em;
 }
 
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
+  font-size: 60%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-color);
+}
+
+.card {
+  --border-radius: 0.75rem;
+  --primary-color: #fedb39;
+  width: calc(33.33% - 2%); /* Set the width to approximately one-third, considering the margin */
+  font-family: "Arial";
+  padding: 1rem;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  background: var(--second-bg-color);
+  border: solid #2b3467;
+  box-shadow: var(--box-shadow);
+  position: relative;
+  margin: 1%; /* Add a small margin between the cards */
+  color: var(--text-color);
+  height: 12em;
+  margin-top: 2em;
+}
+
+.card:nth-child(3n) {
+  margin-right: 0; /* Remove right margin for every third card */
+}
+
+.card > * + * {
+  margin-top: 1.1em;
+}
+
+.card .card__content {
+  color: var(--secondary-color);
+  font-size: 10px;
+}
+
+.card .card__title {
+  padding: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fedb39;
+}
+
+.card .card__date {
+  color: #6e6b80;
+  font-size: 0.8rem;
+}
+
+.card .card__arrow {
+  position: absolute;
+  background: var(--primary-color);
+  padding: 0.4rem;
+  border-top-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  bottom: 0;
+  right: 0;
+  transition: 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card svg {
+  transition: 0.2s;
+}
+
+/* hover */
+.card:hover .card__title {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.card:hover .card__arrow {
+  background: var(--bg-color);
+}
+
+.card:hover .card__arrow svg {
+  transform: translateX(3px);
+}
+
+.card-Container-Header {
+  margin-bottom: 13px;
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tasks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+
 }
