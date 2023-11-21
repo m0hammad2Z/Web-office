@@ -1,9 +1,9 @@
 :root{  
-    --bg-color: #000000;
-    --second-bg-color: #343a40;
-    --text-color: #fff;
+    --bg-color: #132043;
+    --second-bg-color: #2b3467;
+    --text-color: #fcffe7;
     --text-color2: rgba(197, 196, 196, 0.748);
-    --main-color: #ff8b13;
+    --main-color: #fedb39;
     --glass-color: rgba(108, 108, 108, 0.135);
 
     --font-family: 'Fredoka', sans-serif;;
@@ -13,15 +13,15 @@
 
 html{
     scroll-behavior: smooth;
+    font-size: 100%;
 }
 
 
 body{
     background-image: linear-gradient(135deg, var(--second-bg-color), var(--bg-color));
     color: var(--text-color);
-    font-family: var(--font-family);
     width: 80%;
-    margin: auto;
+    margin: 5em auto;
 }
 
 h1{
@@ -52,12 +52,11 @@ hr{
     gap: 5em;
 }
 
-.welcome-section :nth-child(1){
-    margin-bottom: -0.3em;
-}
-.welcome-section :nth-child(2){
-    color: var(--main-color);
-    margin-left: 0.4em;
+.welcome-section span{
+    text-decoration: underline;
+    text-decoration-color: var(--main-color);
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.4em; 
 }
 
 .statistic-section, .news-section, .announcements-section{
@@ -71,8 +70,8 @@ hr{
 .news-section h3, .announcements-section h3{
     text-decoration: underline;
     text-decoration-color: var(--main-color);
-    text-decoration-thickness: 0.2em;
-    text-underline-offset: 0.4em; 
+    text-decoration-thickness: 0.1em;
+     
 }
 
 .title> h2{
@@ -164,7 +163,7 @@ hr{
 /* announcements */
 .announcements-section > .announcement-cards > .announcement-card{
     background-color: var(--second-bg-color);
-    padding: 1em 1.5em;
+    padding: 1em 1.3em;
     box-sizing: border-box;
     border-radius: var(--boder-radiues);    
 }
