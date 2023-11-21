@@ -83,8 +83,8 @@ export function Student(id, firstName, lastName, email, password, birthDate, tea
     }
 }
 
-export function Todo(student_id, title, description, createdBy){
-    this.student_id = student_id;
+export function Todo(students_ids, title, description, createdBy){
+    this.students_ids = students_ids;
     this.title = title;
     this.description = description;
     this.createdBy = createdBy;
