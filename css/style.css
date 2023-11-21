@@ -6,7 +6,7 @@
   --main-color: #fedb39;
   --glass-color: rgba(108, 108, 108, 0.135);
 
-  --font-family: 'Fredoka', sans-serif;
+  --font-family: "Fredoka", sans-serif;
   --box-shadow: 0 1em 3em 0.4em rgba(0, 0, 0, 0.193);
   --boder-radiues: 1em;
 }
@@ -25,7 +25,6 @@ html {
   border: none;
   outline: none;
   scroll-behavior: smooth;
-
 }
 
 body {
@@ -199,6 +198,7 @@ span {
   position: absolute;
   width: 100%;
   height: 100%;
+  z-index: -100;
   transform: rotateZ(40deg);
 }
 
