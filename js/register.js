@@ -9,7 +9,7 @@ function validateFullName() {
     
     const fullNameRegex1 = /\b[A-Z]/;
     const fullNameRegex2 = /([0-9]+|\W)/;
-    const fullNameRegex3 = /[A-Z]{1}[a-z]+( [a-z]+){3}/;
+    const fullNameRegex3 = /([A-Z]{1}[a-z]+)/;
 
     if (fullName === '') {
         fullNameError.textContent = "Full name cannot be empty.";
