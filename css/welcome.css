@@ -6,7 +6,6 @@
     --main-color: #fedb39;
     --glass-color: rgba(108, 108, 108, 0.135);
 
-    --font-family: 'Fredoka', sans-serif;;
     --box-shadow: 0 1em 3em 0.4em rgba(0, 0, 0, 0.193);
     --boder-radiues: 1em;
 }
@@ -16,12 +15,28 @@ html{
     font-size: 100%;
 }
 
+@keyframes vibrateBorderLines{
+    0%{
+        outline: 0.25em solid var(--main-color);
+        outline-offset: 0em;
+    }
+    90%{
+        outline: 0em solid transparent;
+        outline-offset: 1.5em;
+    }    
+
+}
+
+
 
 body{
     background: var(--bg-color);
     color: var(--text-color);
     width: 80%;
     margin: 5em auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 h1{
@@ -90,10 +105,10 @@ hr{
 }
 
 .cards > div:hover{
-    transform: scale(1.05);
-    transition: all 0.5s;
-    border: 0.2em solid var(--main-color);
+    animation: vibrateBorderLines 1s infinite;
+    transition: all 1s;
 }
+
 
 /* Statistic Section */
 .statistic-section > .statistic-cards > .statistic-card{
@@ -152,6 +167,7 @@ hr{
     gap: 1em;
     box-shadow: var(--box-shadow);
     width: 25em;
+    cursor: pointer;
 }
 
 .news-section > .news-cards > .news-card > .top > img{
@@ -166,6 +182,7 @@ hr{
     padding: 1em 1.3em;
     box-sizing: border-box;
     border-radius: var(--boder-radiues);    
+    cursor: pointer;
 }
 
 
@@ -173,7 +190,6 @@ hr{
 /* Modal */
 .modal{
     position: fixed;
-    display: block;
     top: 0;
     left: 0;
     width: 100%;
@@ -184,7 +200,11 @@ hr{
     align-items: center;
     z-index: 100;
     backdrop-filter: blur(0.5em);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s;
 }
+
 
 .modal-content{
     background-color: var(--second-bg-color);
@@ -199,6 +219,8 @@ hr{
     margin-bottom: 2em;
 }
 
+
+
 .modal-content > .modal-header h2{
     text-decoration: underline;
     text-decoration-color: var(--main-color);
@@ -212,8 +234,21 @@ hr{
     cursor: pointer;
 }
 
+.modal-content > .modal-header .close:hover{
+    transform: scale(1.2);
+    transition: all 0.5s;
+}
+
 .modal-content > .modal-body{
     display: flex;
     flex-direction: column;
     gap: 1em;
+    width: 100%;
+}
+
+.modal-content > .modal-body img{
+    border-radius: var(--boder-radiues);
+    object-fit: cover;
+    height: 40em;
+    width: 100%;
 }
