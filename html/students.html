@@ -8,10 +8,13 @@
     <link rel="stylesheet" href="../css//style.css">
     <link rel="stylesheet" href="../css/students.css">
     <link rel="stylesheet" href="../css/seidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous">
+
 </head>
 
 <body>
-    <div class="sidebar-container">
+    <!-- <div class="sidebar-container">
         <div class="sidebar">
             <div class="links-field">
                 <div class="logo">
@@ -41,110 +44,63 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
     <div class="students">
         <div class="students-Container">
             <div class="students-Containert-Header">
                 <h1>Students</h1>
-                <button class="btn">Add Student</button>
+                <button class="btn" id="addStudentForm">Add Student</button>
             </div>
             <div class="table-Container">
                 <table>
-                    <tr class="thead">
-                        <th>Student Name</th>
-                        <th>Rate</th>
-                        <th># Absence</th>
-                        <th># Tasks</th>
-                        <th>Feedbaks</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>90%</td>
-                        <td>2</td>
-                        <td>10</td>
-                        <td>Good</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Jane Smith</td>
-                        <td>85%</td>
-                        <td>3</td>
-                        <td>8</td>
-                        <td>Excellent</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Bob Johnson</td>
-                        <td>78%</td>
-                        <td>5</td>
-                        <td>12</td>
-                        <td>Satisfactory</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Alice Brown</td>
-                        <td>92%</td>
-                        <td>1</td>
-                        <td>15</td>
-                        <td>Excellent</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mark Davis</td>
-                        <td>80%</td>
-                        <td>4</td>
-                        <td>9</td>
-                        <td>Good</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mark Davis</td>
-                        <td>80%</td>
-                        <td>4</td>
-                        <td>9</td>
-                        <td>Good</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mark Davis</td>
-                        <td>80%</td>
-                        <td>4</td>
-                        <td>9</td>
-                        <td>Good</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mark Davis</td>
-                        <td>80%</td>
-                        <td>4</td>
-                        <td>9</td>
-                        <td>Good</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mark Davis</td>
-                        <td>80%</td>
-                        <td>4</td>
-                        <td>9</td>
-                        <td>Good</td>
-                        <td><button class="editBtn">Edit</button></td>
-                        <td><button class="deleteBtn">Delete</button></td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th class="thead">Student Name</th>
+                            <th class="thead">Rate</th>
+                            <th class="thead"># Absence</th>
+                            <th class="thead">Done Tasks</th>
+                            <th class="thead"># Of Tasks</th>
+                            <th class="thead">Feedbacks</th>
+                            <th class="thead">Edit</th>
+                            <th class="thead">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
     </div>
+    <div id="popupForm" class="popup" style="display: none;">
+        <form id="studentForm">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="birthDate">Birth Date:</label>
+            <input type="date" id="birthDate" name="birthDate" required>
+
+            <label for="mobile">Mobile:</label>
+            <input type="tel" id="mobile" name="mobile" required>
+
+            <label for="imgUrl">Image URL:</label>
+            <input type="url" id="imgUrl" name="imgUrl" required>
+
+            <button type="button" id="addStudentBtn">Add Student</button>
+        </form>
+        <span class="close" id="closeX">&times;</span>
+    </div>
+    <div class="overlay" id="overlay"></div>
     <script type="module" src="../js/students.js"></script>
+    <script type="module" src="../js/models/models.js"></script>
 </body>
+
 
 </html>
