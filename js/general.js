@@ -27,14 +27,11 @@ let roles = {
     student: 'student'
 }
 
-
 let users = [];
 let students = [];
 let announcements = [];
 let todos = [];
 let feedbacks = [];
 let news = [];
-
-
 
 export let general = { ReadJson, WriteOnlocalStorage, ReadFromlocalStorage, roles, users, students, announcements, todos, feedbacks, news, keysObj};

@@ -13,9 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <script type="module" src="../js/welcome.js"></script>
     <div class="container">
         <div class="welcome-section">
-            <h1>Welcome 👋,<span>    Mohammad Al-Zaro</span></h1>
+            <h1>Hola👋 ,  <span id="name"></span></h1>
 
         </div>
 
@@ -26,39 +27,7 @@
                 </div>
 
                 <div class="statistic-cards cards">
-                    <div class="statistic-card" id="students-statistic">
-                        <div class="left">
-                            <h3><i class="fas fa-users"></i>Number of Students</h3>
-                            <h1>87</h1>
-                        </div>
-                        <div class="right">
-                            <div id="progress">
-                                <div id="bar" style="width: 87%;"></div>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="statistic-card" id="trainers-statistic">
-                        <div class="left">
-                            <h3><i class="fas fa-chalkboard-teacher"></i>Number of Trainers</h3>
-                            <h1>56</h1>
-                        </div>
-                        <div class="right">
-                            <div id="progress">
-                                <div id="bar" style="width: 56%;"></div>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="statistic-card" id="students-statistic">
-                        <div class="left">
-                            <h3><i class="fas fa-crown"></i>Number of Leaders</h3>
-                            <h1>3</h1>
-                        </div>
-                        <div class="right">
-                            <div id="progress">
-                                <div id="bar" style="width: 3%;"></div>
-                              </div>
-                        </div>
-                    </div>
+
                 </div>
 
         </div>
@@ -71,109 +40,47 @@
             </div>
 
             <div class="news-cards cards">
-                <div class="news-card">
-                    <div class="top">
-                        <img src="https://th.bing.com/th/id/OIP.CVfz0e-F_vCMJ9428mFlhwHaD4?w=768&h=402&rs=1&pid=ImgDetMain" alt="news" >
-                    </div>
-                    <div class="bottom">
-                        <h3>News Title</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                    </div>
-                </div>
-
-                <div class="news-card">
-                    <div class="top">
-                        <img src="https://th.bing.com/th/id/R.093db1cce92bd5ed03efb579d5dbc41e?rik=eNyXlQzdzDyEFA&pid=ImgRaw&r=0" alt="news" >
-                    </div>
-                    <div class="bottom">
-                        <h3>News Title</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                    </div>
-                </div>
-
-                <div class="news-card">
-                    <div class="top">
-                        <img src="https://static.vecteezy.com/system/resources/previews/001/226/460/original/breaking-news-tv-background-vector.jpg" alt="news" >
-                    </div>
-                    <div class="bottom">
-                        <h3>News Title</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                    </div>
-                </div>   
-                
-                <div class="news-card">
-                    <div class="top">
-                        <img src="https://static.vecteezy.com/system/resources/previews/001/226/460/original/breaking-news-tv-background-vector.jpg" alt="news" >
-                    </div>
-                    <div class="bottom">
-                        <h3>News Title</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                    </div>
-                </div>   
-
+ 
             </div>
 
         </div>
-
+        
         <div class="announcements-section">
             <div class="title">
                 <h2><i class="fas fa-bullhorn"></i> Announcements</h2>
                 <hr>
             </div>
             <div class="announcement-cards cards">
-                <div class="announcement-card">
-                    <h3>Announcement title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                </div>
-                <div class="announcement-card">
-                    <h3>Announcement title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                </div>
-                <div class="announcement-card">
-                    <h3>Announcement title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                </div>
-                <div class="announcement-card">
-                    <h3>Announcement title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                </div>
-                <div class="announcement-card">
-                    <h3>Announcement title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                </div>
-                <div class="announcement-card">
-                    <h3>Announcement title</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                </div>
+
             </div>
         </div>
 
     </div>  
 
-    <!-- <div class="modal news-modal">
+    <div class="modal news-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>News Title</h2>
-                <span class="close">&times;</span>
+                <span class="close" >&times;</span>
             </div>
             <div class="modal-body">
                 <img src="https://th.bing.com/th/id/OIP.CVfz0e-F_vCMJ9428mFlhwHaD4?w=768&h=402&rs=1&pid=ImgDetMain" alt="news" >
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
             </div>
         </div>
-    </div> -->
+    </div>
 
-    <!-- <div class="modal announcement-modal">
+    <div class="modal announcement-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Announcement Title</h2>
-                <span class="close">&times;</span>
+                <span  class="close" >&times;</span>
             </div>
             <div class="modal-body">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
             </div>
-        </div>  -->
-
+        </div> 
+    </div>
 
 
         <div class="sidebar-container">
@@ -207,6 +114,6 @@
             </div>
         </div>
 
-    <script type="module" src="../js/welcome.js"></script>
+    
 </body>
 </html>
