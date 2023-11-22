@@ -1,57 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <!-- Font Awesome stylesheet link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyT8Pv/HLUuAdgtzZNvO9XuUtT3cHwX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="../css/todo.css">
     <link rel="stylesheet" href="../css/seidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css">
-    <!-- Your custom styles -->
-    <!-- Your custom styles -->
     <style>
-       
     </style>
 </head>
+
 <body>
     <div class="main"></div>
     <div id="todo-container">
-        <div  style="text-align: center;"><h2><i class="fas fa-pen"></i> To-Do List <span style="font-weight: bold; font-size: 40px;"> <i class='bx bx-task'></i></span> </h2> </div>
-        <div>
-            <input type="text" id="add-task-input" placeholder="Task">
-            <input type="text" id="add-student-input" placeholder="Student">
-            <button id="add-task-btn" onclick="addTask()">Add Task</button>
+        <div style="text-align: center;">
+            <h2><i class="fas fa-pen"></i> To-Do List <span style="font-weight: bold; font-size: 40px;"> <i
+                        class='bx bx-task'></i></span> </h2>
+        </div>
+        <div class="tasksInput">
+            <table>
+                <tr>
+                    <td><input type="text" id="add-task-input" placeholder="Task"></td>
+                    <td><select id="add-student-input" multiple style="height: 32px; overflow-y: auto;">
+                        </select></td>
+                    <td> <button id="add-task-btn" onclick="addTask()">Add Task</button></td>
+                </tr>
+            </table>
+            <!-- <input type="text" id="add-student-input" placeholder="Student"> -->
+            <div id="detailsPopup" class="popup" style="display: none;">
+                <div id="detailsContent"></div>
+                <span class="close" id="closeDetails">&times;</span>
+            </div>
         </div>
         <ul id="task-list"></ul>
     </div>
+    <div class="overlay" id="overlay"></div>
 
-    <script>
-        function addTask() {
-            var taskInput = document.getElementById("add-task-input");
-            var studentInput = document.getElementById("add-student-input");
-
-            var task = taskInput.value.trim();
-            var student = studentInput.value.trim();
-
-            if (task !== "" && student !== "") {
-                var taskList = document.getElementById("task-list");
-
-                var taskItem = document.createElement("li");
-                taskItem.classList.add("task-item");
-                taskItem.innerHTML = `
-                    <span>${task}</span>
-                    <span>${student}</span>
-                `;
-
-                taskList.appendChild(taskItem);
-
-                // Clear input fields
-                taskInput.value = "";
-                studentInput.value = "";
-            }
-        }
-    </script>
+    <script src="../js/todo.js"></script>
 </body>
+
 </html>
