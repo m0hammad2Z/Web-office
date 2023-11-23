@@ -104,8 +104,8 @@ function loadStudentsIntoTable() {
     }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${
       student.id
     }">+</button></td>
-    <td>${student.tasks.length ? student.tasks : "No Tasks"
-    }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id=</td>
+    <td>${student.tasks.length ? student.tasks : "No Tasks"}&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id=</td>
+    <td>${student.feedbacks.length ? student.feedbacks : "No Feedbacks"}</td>
     <td><button class="editBtn" data-student-id="${
       student.id
     }">Edit</button></td>
