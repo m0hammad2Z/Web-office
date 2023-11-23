@@ -24,6 +24,8 @@ export function User(
   this.mobile = mobile;
 
   this.add = function () {
+    let index = general.users.findIndex((o)=>this.id==o.id)
+    if(index != -1) return;
     general.users.push(this);
     general.WriteOnlocalStorage(
       general.keysObj.users,
@@ -33,6 +35,7 @@ export function User(
 
   this.delete = function () {
     let index = general.users.findIndex((user) => user.id == this.id);
+    if(index == -1) return;
     general.users.splice(index, 1);
     general.WriteOnlocalStorage(
       general.keysObj.users,
@@ -42,6 +45,7 @@ export function User(
 
   this.update = function () {
     let index = general.users.findIndex((user) => user.id == this.id);
+    if(index == -1) return;
     general.users[index] = this;
     general.WriteOnlocalStorage(
       general.keysObj.users,
@@ -57,6 +61,8 @@ export function Feedback(student_id, title, description, createdBy) {
   this.createdBy = createdBy;
 
   this.add = function () {
+    let index = general.feedbacks.findIndex((o)=>this.student_id==o.student_id)
+    if(index != -1) return;
     general.feedbacks.push(this);
     general.WriteOnlocalStorage(
       general.keysObj.feedbacks,
@@ -66,8 +72,9 @@ export function Feedback(student_id, title, description, createdBy) {
 
   this.delete = function () {
     let index = general.feedbacks.findIndex(
-      (feedback) => feedback.id == this.id
+      (feedback) => feedback.student_id == this.student_id
     );
+    if(index == -1) return;
     general.feedbacks.splice(index, 1);
     general.WriteOnlocalStorage(
       general.keysObj.feedbacks,
@@ -79,6 +86,7 @@ export function Feedback(student_id, title, description, createdBy) {
     let index = general.feedbacks.findIndex(
       (feedback) => feedback.id == this.id
     );
+    if(index == -1) return;
     general.feedbacks[index] = this;
     general.WriteOnlocalStorage(
       general.keysObj.feedbacks,
@@ -119,6 +127,8 @@ export function Student(
   this.feedbacks = feedbacks;
 
   this.add = function () {
+    let index = general.students.findIndex((o)=>this.id==o.id)
+    if(index != -1) return;
     general.students.push(this);
     general.WriteOnlocalStorage(
       general.keysObj.students,
@@ -128,6 +138,7 @@ export function Student(
 
   this.delete = function () {
     let index = general.students.findIndex((student) => student.id == this.id);
+    if(index == -1) return;
     general.students.splice(index, 1);
     general.WriteOnlocalStorage(
       general.keysObj.students,
@@ -137,6 +148,7 @@ export function Student(
 
   this.update = function () {
     let index = general.students.findIndex((student) => student.id == this.id);
+    if(index == -1) return;
     general.students[index] = this;
     general.WriteOnlocalStorage(
       general.keysObj.students,
@@ -152,6 +164,8 @@ export function Todo(students_ids, title, description, createdBy) {
   this.createdBy = createdBy;
 
   this.add = function () {
+    let index = general.todos.findIndex((o)=>this.id==o.id)
+    // if(index != -1) return;
     general.todos.push(this);
     general.WriteOnlocalStorage(
       general.keysObj.todos,
@@ -185,6 +199,8 @@ export function Announcement(id, title, description, createdBy) {
   this.createdBy = createdBy;
 
   this.add = function () {
+    let index = general.users.findIndex((o)=>this.id==o.id)
+    if(index != -1) return;
     general.announcements.push(this);
     general.WriteOnlocalStorage(
       general.keysObj.announcements,
@@ -196,6 +212,7 @@ export function Announcement(id, title, description, createdBy) {
     let index = general.announcements.findIndex(
       (announcement) => announcement.id == this.id
     );
+    if(index == -1) return;
     general.announcements.splice(index, 1);
     general.WriteOnlocalStorage(
       general.keysObj.announcements,
@@ -204,6 +221,7 @@ export function Announcement(id, title, description, createdBy) {
   };
 
   this.update = function () {
+    if(index == -1) return;
     let index = general.announcements.findIndex(
       (announcement) => announcement.id == this.id
     );

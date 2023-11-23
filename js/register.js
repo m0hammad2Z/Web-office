@@ -1,3 +1,22 @@
+import { Announcement, Student, User } from "./models/models.js";
+import { general } from "./general.js";
+
+
+
+let registerd_user;
+function LoadData() {
+    general.users = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
+    general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
+    general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
+    general.news = general.ReadJson('../data/news.json') || [];
+    general.todos = JSON.parse(general.ReadFromlocalStorage(general.keysObj.todos)) || [];
+    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+}
+LoadData();
+
+general.RedirectIfNotAuthorized([general.roles.admin], registerd_user,'../index.html')
+
+
 const registrationForm = document.getElementById('registrationForm');
 const fullNameInput = document.getElementById('fullName');
 const fullNameError = document.getElementById('fullNameError');

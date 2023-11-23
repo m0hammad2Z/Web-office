@@ -16,7 +16,7 @@
     <script type="module" src="../js/welcome.js"></script>
     <div class="container">
         <div class="welcome-section">
-            <h1>Hola👋 ,  <span id="name"></span></h1>
+            <h1>Hi 👋 ,  <span id="name"></span></h1>
 
         </div>
 
@@ -95,18 +95,18 @@
                 </div>
                 <div class="profile-field">
                     <a href="#"><i class="fas fa-plus"></i>Add</a>
-                    <div class="profile">
-                        <div class="profile-name-image">
+                    <div class="profile" >
+                        <div class="profile-name-image" id="sidebare-profile">
                             <div>
                                 <img src="https://th.bing.com/th/id/OIP.CVfz0e-F_vCMJ9428mFlhwHaD4?w=768&h=402&rs=1&pid=ImgDetMain" alt="profile">
                             </div>
                             <div>
-                                <h4>Mohammad Al-Zaro</h4>
-                                <p>Trainer</p>
+                                <h4 id="sidebar-user-name"></h4>
+                                <p id="sidebar-role"></p>
                             </div>
                         </div>
                         <div>
-                            <i class="fas fa-sign-out-alt"></i>
+                            <i class="fas fa-sign-out-alt" id="sidebar-logout"></i>
                         </div>
                     </div>
                 </div>
@@ -114,6 +114,6 @@
             </div>
         </div>
 
-    
+    <script type="module" src="../js/sidebar.js"></script>
 </body>
 </html>
