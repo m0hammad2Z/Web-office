@@ -1,3 +1,5 @@
+import { User, Announcement, Student, Todo, Feedback } from "./models/models.js";
+
 async function ReadJson(path){
     let respones = await fetch(path);
     let data = respones.json();
@@ -24,7 +26,8 @@ let keysObj = {
 let roles = {
     admin: 'admin',
     trainer : 'trainer',
-    student: 'student'
+    student: 'student',
+    guest : 'guest',
 }
 
 let users = [];
@@ -34,4 +37,60 @@ let todos = [];
 let feedbacks = [];
 let news = [];
 
-export let general = { ReadJson, WriteOnlocalStorage, ReadFromlocalStorage, roles, users, students, announcements, todos, feedbacks, news, keysObj};
+function SetSomeDataIfThereIsNo(){
+    if(!localStorage.getItem(keysObj.users)){
+        for(let i = 1; i <= 5; i++){
+            let r = (Math.floor(Math.random() * 100)) % 2 == 0 ? roles.admin : roles.trainer;
+            let user = new User(i, r, "Mohammad", "Al-Zaro", "imhamd33@gk.com", "1234", new Date(), new Date(), "https://via.placeholder.com/150", "07949854994");
+            user.add();
+        }
+        WriteOnlocalStorage(keysObj.users, JSON.stringify(users));
+    }
+    if(!localStorage.getItem(keysObj.students)){
+        for(let i = 1; i <= 10; i++){
+            let student = new Student(i, "Mohammad", "Al-Zaro", "x@x.x", "1234", new Date(), 1 , "07949854994", "https://via.placeholder.com/150", 0, 0, 0, [], []);
+            student.add();
+        }
+        WriteOnlocalStorage(keysObj.students, JSON.stringify(students));
+    }
+    if(!localStorage.getItem(keysObj.announcements)){
+        for(let i = 1; i <= 4; i++){
+            let announcement = new Announcement(i, "Title", "Description", 1);
+            announcement.add();
+        }
+        WriteOnlocalStorage(keysObj.announcements, JSON.stringify(announcements));
+    }
+    if(!localStorage.getItem(keysObj.todos)){
+        for(let i = 1; i <= 4; i++){
+            let todo = new Todo([1,2,3], "Title", "Description", 1);
+            todo.add();
+        }
+        WriteOnlocalStorage(keysObj.todos, JSON.stringify(todos));
+    }
+    if(!localStorage.getItem(keysObj.feedbacks)){
+        for(let i = 1; i <= 4; i++){
+            let feedback = new Feedback(1, "Title", "Description", 1);
+            feedback.add();
+        }
+        WriteOnlocalStorage(keysObj.feedbacks, JSON.stringify(feedbacks));
+    }
+    if(!localStorage.getItem(keysObj.news)){
+        WriteOnlocalStorage(keysObj.news, JSON.stringify(news));
+    }
+}
+
+function RedirectIfNotAuthorized(rolesAllowed, registerd_user, path){
+    if(!registerd_user){
+        window.location.href = path;
+    }else{
+        for(let role of rolesAllowed){
+            if(role == registerd_user.role){
+                return;
+            }
+        }
+        window.location.href = path;
+    }
+}
+
+
+export let general = {RedirectIfNotAuthorized,SetSomeDataIfThereIsNo, ReadJson, WriteOnlocalStorage, ReadFromlocalStorage, roles, users, students, announcements, todos, feedbacks, news, keysObj};

@@ -5,19 +5,27 @@ import { general } from "./general.js";
 
 let registerd_user;
 function LoadData() {
-    general.users = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users))
-    general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students))
-    general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements))
-    general.news = general.ReadJson('../data/news.json');
+    general.users = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
+    general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
+    general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
+    general.news = general.ReadJson('../data/news.json') || [];
+    general.todos = JSON.parse(general.ReadFromlocalStorage(general.keysObj.todos)) || [];
     registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || null;
 }
 LoadData();
+
+general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user,'../html/login.html')
+
 
 
 //Welcome section
 function AssignName(){
     let name = document.getElementById('name');
-    name.innerHTML = registerd_user.firstName;
+    try{
+        name.innerHTML = registerd_user.firstName;
+    }catch{
+        name.innerHTML = "Guest";
+    }
 }
 AssignName();
 
