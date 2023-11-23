@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,62 +8,33 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/profile.css">
 </head>
-<body>
-    
-    <div class="content" id="UserProfile"> 
-        <h2 class="custom-heading"> Profile</h2>
-        <hr class="section-divider"> 
 
-        <div class="profile-container" id="userProfileContainer"> 
-            <div class="profile-card" id="userProfileCard"> 
-                <div class="profile-image" id="userProfileImage"> 
-                    <img class="user-image" src="/Web-office/resources/images/profile.jpeg" alt="user picture"> 
-                </div>
-                
-                <div class="profile-details" id="userProfileDetails"> 
-                    <div class="profile-info">
-                        <span class="info-label">FirstName</span><br>
-                        <span class="info-value" id="userFirstName"> </span> 
-                    </div>
-                    
-                    <div class="profile-info">
-                        <span class="info-label">LastName</span><br>
-                        <span class="info-value" id="userLastName"></span> 
-                    </div>
-                    
-                    <div class="profile-info">
-                        <span class="info-label">Email</span><br>
-                        <span class="info-value" id="userEmail"> </span> 
-                    </div>
-                    
-                    <div class="profile-info">
-                        <span class="info-label" >Password</span><br>
-                        <span class="info-value" id="userPassword"></span> 
-                    </div>   
-                    <button class="edit-btn" >Edit</button> 
-                    
-                </div>
+<body>
+
+    <div class="profileContainer">
+        <h2 class="custom-heading">Profile</h2>
+        <div id="UserProfileForm">
+            <div class="user-image-container">
+                <img class="user-image" id="userImage" width="274px" height="274px" src="../resources/profile.jpg"
+                    alt="user picture">
             </div>
-            <div id="UserProfileForm" >
-                <div class="user-image-container">
-                    <img class="user-image" id="userImage" width="274px" height="274px" src="/Web-office/resources/images/profile.jpeg" alt="user picture">
-                </div>
-                <br>
-                <label class="form-label" for="Firstnamee">First Name:</label >
-                <input id="userFirstNameInput" type="text">
-                <label class="form-label" for="Lastnamee">Last Name:</label>
-                <input id="userLastNameInput" type="text" >
-                <label class="form-label" for="Emaill">Email:</label>
-                <input id="userEmailInput" type="email" >
-                <label class="form-label" for="Passwordd">Password:</label>
-                <input id="userPasswordInput" type="password" >
-                <button id="saveChangesButton">Save Changes</button>
-            </div>
-            
+            <br>
+            <label class="form-label" for="Firstnamee">First Name</label>
+            <input id="userFirstNameInput" type="text" value="">
+            <label class="form-label" for="Lastnamee">Last Name</label>
+            <input id="userLastNameInput" type="text" value="">
+            <label class="form-label" for="Emaill">Email</label>
+            <input id="userEmailInput" type="email" value="">
+            <!-- <label class="form-label" for="Passwordd">Password</label>
+            <input id="userPasswordInput" type="password" value=""> -->
+            <br>
+            <button id="saveChangesButton" class="saveChangesButton">Edit</button>
         </div>
-       
-    </div>        
-          
+    </div>
+
     <script type="module" src="../js/profile.js"></script>
+    <script>
+    </script>
 </body>
+
 </html>
