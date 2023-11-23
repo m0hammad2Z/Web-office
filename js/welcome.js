@@ -21,6 +21,7 @@ general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], re
 
 
 
+
 //Welcome section
 function AssignName(){
     let name = document.getElementById('name');

@@ -14,3 +14,141 @@
 html{
     scroll-behavior: smooth;
 }
+*{
+  margin: 0;
+  padding: 0;
+}
+#UserProfile {
+  text-align: center;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 20px;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.custom-heading {
+  margin: 10px;
+  color: var(--text-color);
+  font-weight: bold;
+  text-align: center;
+  font-size: 3em;
+}
+
+.section-divider {
+  background-color: var(--main-color);
+  height: 2px;
+  margin-bottom: 20px;
+}
+
+.user-image {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 6px solid #fff;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--main-color);
+  width: 360px;
+  height: 500px;
+  margin-left: 110px;
+  background: var(--second-bg-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: 0.5s;
+}
+
+.profile-info {
+  border-bottom: 1px solid #3f51b5;
+  font-size: 16px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-label,
+.info-value {
+  color: var(--text-color);
+
+}
+
+
+.info-value {
+  font-size: 20px;
+}
+
+.edit-btn {
+  background-color: var(--main-color);
+  color: white;
+  padding: 10px;
+  border: none;
+  width: 120px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: var(--main-color);
+}
+
+#UserProfileForm {
+  display: none;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-image-container {
+  text-align: center;
+}
+
+#userImage {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.form-label {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+#saveChangesButton {
+  background-color: var(--main-color);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#saveChangesButton:hover {
+  background-color: var(--main-color);
+}
