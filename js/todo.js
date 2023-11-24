@@ -15,7 +15,6 @@ function populateStudentDropdown(elementId, selectedStudents) {
     studentDropdown.add(option);
   });
 }
-
 function addTask() {
   var taskInput = document.getElementById("add-task-input");
   var studentInput = document.getElementById("add-student-input");
@@ -31,7 +30,16 @@ function addTask() {
     };
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
-
+    selectedStudents.forEach((studentId) => {
+      var student = students.find((s) => s.id === studentId);
+      if (student) {
+        if (!student.tasks) {
+          student.tasks = [];
+        }
+        student.tasks.push(newTask);
+      }
+    });
+    localStorage.setItem("students", JSON.stringify(students));
     taskInput.value = "";
     studentInput.selectedIndex = -1;
     loadTasks();
@@ -70,11 +78,24 @@ function getStudentNames(studentIds) {
   });
   return names.join(", ");
 }
-
 function deleteTask(taskIndex) {
   if (confirm("Are you sure you want to delete this task?")) {
+    var deletedTask = tasks[taskIndex];
     tasks.splice(taskIndex, 1);
     localStorage.setItem("tasks", JSON.stringify(tasks));
+    deletedTask.studentIds.forEach((studentId) => {
+      var student = students.find((s) => s.id === studentId);
+      if (student) {
+        var taskIndex = student.tasks.findIndex(
+          (task) => task.task === deletedTask.task
+        );
+        if (taskIndex !== -1) {
+          student.tasks.splice(taskIndex, 1);
+        }
+      }
+    });
+
+    localStorage.setItem("students", JSON.stringify(students));
     loadTasks();
     closeDetailsPopup();
   }
