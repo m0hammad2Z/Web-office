@@ -1,24 +1,42 @@
 import { User, Student } from "./models/models.js";
 import { general } from "./general.js";
 
-
-
 general.SetSomeDataIfThereIsNo();
 
 let registerd_user;
 function LoadData() {
-    general.users = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
-    general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
-    general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
-    general.news = general.ReadJson('../data/news.json') || [];
-    general.todos = JSON.parse(general.ReadFromlocalStorage(general.keysObj.todos)) || [];
-    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+  general.users =
+    JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
+  general.students =
+    JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
+  general.announcements =
+    JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) ||
+    [];
+  general.news = general.ReadJson("../data/news.json") || [];
+  general.todos =
+    JSON.parse(general.ReadFromlocalStorage(general.keysObj.todos)) || [];
+  registerd_user =
+    JSON.parse(general.ReadFromlocalStorage("registerd_user")) ||
+    new User(
+      -1,
+      general.roles.guest,
+      "Guest",
+      "",
+      "",
+      "",
+      new Date(),
+      new Date(),
+      "",
+      ""
+    );
 }
 LoadData();
 
-general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user,'../html/login.html')
-
-
+general.RedirectIfNotAuthorized(
+  [general.roles.admin, general.roles.trainer],
+  registerd_user,
+  "../html/login.html"
+);
 
 loadStudentsIntoTable();
 document
@@ -104,7 +122,7 @@ function loadStudentsIntoTable() {
     }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${
       student.id
     }">+</button></td>
-    <td>${student.tasks.length ? student.tasks : "No Tasks"}&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id=</td>
+    <td>${student.tasks.length ? student.tasks.length : "No Tasks"}</td>
     <td>${student.feedbacks.length ? student.feedbacks : "No Feedbacks"}</td>
     <td><button class="editBtn" data-student-id="${
       student.id
