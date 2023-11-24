@@ -68,11 +68,7 @@ function SetSomeDataIfThereIsNo(){
     //     WriteOnlocalStorage(keysObj.todos, JSON.stringify(todos));
     // }
     if(!localStorage.getItem(keysObj.feedbacks)){
-        for(let i = 1; i <= 4; i++){
-            let feedback = new Feedback(1, "Title", "Description", 1);
-            feedback.add();
-        }
-        WriteOnlocalStorage(keysObj.feedbacks, JSON.stringify(feedbacks));
+        feedbacks =[];
     }
     if(!localStorage.getItem(keysObj.news)){
         WriteOnlocalStorage(keysObj.news, JSON.stringify(news));

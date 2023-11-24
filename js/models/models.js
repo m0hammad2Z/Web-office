@@ -54,14 +54,15 @@ export function User(
   };
 }
 
-export function Feedback(student_id, title, description, createdBy) {
+export function Feedback(id, student_id, title, description, createdBy) {
+  this.id = id;
   this.student_id = student_id;
   this.title = title;
   this.description = description;
   this.createdBy = createdBy;
 
   this.add = function () {
-    let index = general.feedbacks.findIndex((o)=>this.student_id==o.student_id)
+    let index = general.feedbacks.findIndex((o)=>this.id==o.id)
     if(index != -1) return;
     general.feedbacks.push(this);
     general.WriteOnlocalStorage(
@@ -72,7 +73,7 @@ export function Feedback(student_id, title, description, createdBy) {
 
   this.delete = function () {
     let index = general.feedbacks.findIndex(
-      (feedback) => feedback.student_id == this.student_id
+      (feedback) => feedback.id == this.id
     );
     if(index == -1) return;
     general.feedbacks.splice(index, 1);

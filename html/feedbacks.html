@@ -1,11 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Feedback</title>
+    <link rel="stylesheet" href="../css//style.css">
+    <link rel="stylesheet" href="../css/students.css">
+    <link rel="stylesheet" href="../css/seidebar.css">
+    <link rel="stylesheet" href="../css/feedbacks.css">
 </head>
+
+
 <body>
+
+        <div class="students">
+            <div class="students-Container">
+                <div class="students-Containert-Header">
+                    <h1>Feedbacks</h1>
+                    <button class="btn" id="addFeedbackBtn">Add Feedback</button>
+                </div>
+                <div class="table-Container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="thead">Student Name</th>
+                                <th class="thead">Feedback</th>
+                                <th class="thead">Descreption</th>
+                                <th class="thead">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody class="students-cards">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="addFeedbackModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>                
+                <form id="feedbackForm">
+                    <label for="studentSelect">Select Student:</label>
+                    <select id="studentSelect" required>
+                        <option value="">Select Student</option>
+                    </select>
+
+                    <br>
     
-</body>
+                    <label for="feedbackText">Title:</label>
+                    <input type="text" id="feedbackTitle" required></input>
+
+                    <br>
+    
+                    <label for="feedbackText">Descreption:</label>
+                    <textarea id="feedbackDesc"  required></textarea>
+
+                    <br>
+                    
+    
+                    <button type="submit" id="addFeedbackSubmitBtn">Add Feedback</button>
+                </form>
+            </div>
+            </div>
+            
+
+        <script type="module" src="../js/feedbacks.js"></script>
+
+    </body>
+
+    </html>
+
 </html>
