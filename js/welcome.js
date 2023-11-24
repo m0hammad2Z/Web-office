@@ -118,7 +118,7 @@ function MakeAnnouncementCard(title, description) {
                 `
 
     announcementCard.addEventListener('click', function(){
-        ShowAnnouncementModal();
+        ShowAnnouncementModal(title, description);
     })
 
     announcementsCards.appendChild(announcementCard);
@@ -151,18 +151,18 @@ function ShowNewsModal(title, description, imgURL) {
     `;
 }
 
-function ShowAnnouncementModal(){
+function ShowAnnouncementModal(title, description){
     document.querySelector(".announcement-modal").style.visibility = "visible";
     document.querySelector(".announcement-modal").style.opacity = 1;
     const announcementModal = document.querySelector('.announcement-modal');
     announcementModal.innerHTML = `
         <div class="modal-content">
         <div class="modal-header">
-            <h2>Announcement title</h2>
+            <h2>${title}</h2>
             <span class="close">&times;</span>
         </div>
         <div class="modal-body">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+            <p>${description}</p>
         </div> `;
 }
 

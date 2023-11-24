@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+
 :root {
   --bg-color: #132043;
   --second-bg-color: #2b3467;
@@ -13,7 +15,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 60%;
+  font-size: 80%;
   overflow-x: hidden;
 }
 
@@ -31,6 +33,9 @@ body {
   background: var(--bg-color);
   color: var(--text-color);
   font-family: var(--font-family);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .header {

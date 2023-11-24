@@ -158,41 +158,6 @@ export function Student(
   };
 }
 
-export function Todo(students_ids, title, description, createdBy) {
-  this.students_ids = students_ids;
-  this.title = title;
-  this.description = description;
-  this.createdBy = createdBy;
-
-  this.add = function () {
-    let index = general.todos.findIndex((o)=>this.id==o.id)
-    // if(index != -1) return;
-    general.todos.push(this);
-    general.WriteOnlocalStorage(
-      general.keysObj.todos,
-      JSON.stringify(general.todos)
-    );
-  };
-
-  this.delete = function () {
-    let index = general.todos.findIndex((todo) => todo.id == this.id);
-    general.todos.splice(index, 1);
-    general.WriteOnlocalStorage(
-      general.keysObj.todos,
-      JSON.stringify(general.todos)
-    );
-  };
-
-  this.update = function () {
-    let index = general.todos.findIndex((todo) => todo.id == this.id);
-    general.todos[index] = this;
-    general.WriteOnlocalStorage(
-      general.keysObj.todos,
-      JSON.stringify(general.todos)
-    );
-  };
-}
-
 export function Announcement(id, title, description, createdBy) {
   this.id = id;
   this.title = title;

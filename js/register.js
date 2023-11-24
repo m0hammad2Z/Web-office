@@ -85,24 +85,24 @@ function validateEmail() {
 
 // Password Validation
 
-// const passwordInput = document.getElementById('password').value;
-// function validatePassword () {
+const passwordInput = document.getElementById('password').value;
+function validatePassword () {
    
-//     const passwordError = document.getElementById('passwordError');
-//     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\W]{8,}$/;
+    const passwordError = document.getElementById('passwordError');
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
-//    if (!passwordRegex.test(passwordInput)) {
-//         setErrorMsg(passwordError, 'Invalid password format');
-//     } else {
-//         successMsg(passwordError);
-//     }
-// }
+   if (!passwordRegex.test(passwordInput)) {
+        setErrorMsg(passwordError, 'Invalid password format');
+    } else {
+        successMsg(passwordError);
+    }
+}
 
 // Mobile number Validation
 const mobileInput = document.getElementById('mobile');
 function validateMobile() {
     const mobileError = document.getElementById('mobileError');
-    const mobileRegex = /^07[7-9]{1}[0-9]{7}$/;
+    const mobileRegex = /\d/;
     const mobileRegex2 = /\D/;
 
      if (!mobileRegex.test(mobileInput.value)) {
@@ -123,3 +123,21 @@ function setErrorMsg(element, message) {
 function successMsg(element) {
     element.textContent = '';
 }
+
+
+// Register
+const registerBtn = document.getElementById('registerButton');
+registerBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const mobile = document.getElementById('mobile').value;
+    const role = general.roles.trainer;
+    const birthDate = document.getElementById('birthDate').value;
+    let largerID = general.users.reduce((max, user) => max.id > user.id ? max : user).id;
+    const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(), mobile, "");
+    ru.add();
+    alert("User Added Successfully");
+});

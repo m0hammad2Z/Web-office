@@ -10,10 +10,7 @@
     --boder-radiues: 1em;
 }
 
-html{
-    scroll-behavior: smooth;
-    font-size: 100%;
-}
+
 
 @keyframes vibrateBorderLines{
     0%{
@@ -34,9 +31,6 @@ body{
     color: var(--text-color);
     width: 80%;
     margin: 5em auto;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
 h1{
@@ -166,7 +160,7 @@ hr{
     border-radius: var(--boder-radiues);
     gap: 1em;
     box-shadow: var(--box-shadow);
-    width: 25em;
+    width: 30em;
     cursor: pointer;
 }
 
@@ -183,6 +177,8 @@ hr{
     box-sizing: border-box;
     border-radius: var(--boder-radiues);    
     cursor: pointer;
+    width: 30em;
+    
 }
 
 

@@ -21,16 +21,21 @@
                     <h1>Web Office</h1>
                 </div>
                 <a href="welcome.html"><i class="fas fa-home"></i>Dashboard</a>
-                <a href="todo.html"><i class="fas fa-check"></i>Todo</a>
                 <a href="students.html"><i class="fas fa-users"></i>Students</a>
+                <a href="todo.html"><i class="fas fa-check"></i>Todo</a> 
+                <a href="feedbacks.html"><i class="fas fa-comment"></i>Feedbacks</a>
             </div>
+
+            <div class="warning-field">
+                <h4>Click here to close the sidebar</h4>
+            </div>
+
             <div class="profile-field">
-                <a href="#"><i class="fas fa-plus"></i>Add</a>
-                <div class="profile">
+                <a href="../html/register.html" class="add-trainer"><i class="fas fa-plus"></i>Add Trainer</a>
+                <div class="profile" >
                     <div class="profile-name-image" id="sidebare-profile">
                         <div>
-                            <img src="https://th.bing.com/th/id/OIP.CVfz0e-F_vCMJ9428mFlhwHaD4?w=768&h=402&rs=1&pid=ImgDetMain"
-                                alt="profile">
+                            <img src="https://th.bing.com/th/id/OIP.CVfz0e-F_vCMJ9428mFlhwHaD4?w=768&h=402&rs=1&pid=ImgDetMain" alt="profile">
                         </div>
                         <div>
                             <h4 id="sidebar-user-name"></h4>
@@ -42,9 +47,14 @@
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div class="arrow">
+            <i class="fas fa-arrow-right"></i>
         </div>
     </div>
+
+    
     <div class="students">
         <div class="students-Container">
             <div class="students-Containert-Header">
@@ -100,6 +110,7 @@
     <div class="overlay" id="overlay"></div>
     <script type="module" src="../js/students.js"></script>
     <script type="module" src="../js/models/models.js"></script>
+    <script type="module" src="../js/sidebar.js"></script>
 </body>
 
 

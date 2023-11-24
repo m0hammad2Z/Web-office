@@ -28,18 +28,31 @@ LoadData();
 
 
 // Design
-
 let sidebarFlag = false;
 let sidebarContainer = document.querySelector('.sidebar-container');
-sidebarContainer.style.transform = 'translate(95%)';
-sidebarContainer.addEventListener('click', ()=>{
+let sidebar = document.querySelector('.sidebar');
+let arrow = document.querySelector('.arrow');
+let addTrainer = document.querySelector('.add-trainer');
+
+if(registerd_user.role != general.roles.admin){
+    addTrainer.style.display = "none";
+}
+
+
+sidebarContainer.style.transform = 'translate(-99%)';
+
+arrow.addEventListener('click', ()=>{
     if(!sidebarFlag){
-        sidebarContainer.style.transform = 'translate(95%)';
+        sidebarContainer.style.transform = 'translate(-99%)';
         sidebarFlag = true;
-        console.log(sidebarFlag)
+        
     } else{
         sidebarContainer.style.transform = 'translate(0)';
         sidebarFlag = false
-        console.log(sidebarFlag)
     };
+});
+
+sidebar.addEventListener('click', ()=>{
+    sidebarContainer.style.transform = 'translate(-99%)';
+    sidebarFlag = true;
 });

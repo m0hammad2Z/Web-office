@@ -11,6 +11,28 @@
     --boder-radiues: 1em;
 }
 
+h1{
+    font-size: 3em;
+}
+
+i{
+    font-size: 1.3em;
+    color: var(--main-color);
+    padding-right: 0.5em;
+}
+
+p{
+    color: var(--text-color2);
+}
+
+hr{
+    width: 100%;
+    border: 0.12em solid var(--main-color);
+    border-radius: var(--boder-radiues);
+    opacity: 0.4;
+    margin:0;
+}
+
 .sidebar-container{
     backdrop-filter: blur(0.2em);
     position: fixed;
@@ -20,6 +42,9 @@
     height: 100%;
     transform: translate(95%);
     transition: all 0.5s ease;
+    z-index: 100;
+
+    
 }
 
 .sidebar{
@@ -37,11 +62,6 @@
     justify-content: space-between;
     padding-top: 4em;
 }
-
-
-/* .sidebar-container:hover{
-    transform: translate(0);
-} */
 
 
 
@@ -112,4 +132,54 @@
     height: 3em;
     object-fit: cover;
     border-radius: 50%;
+}
+
+
+.sidebar-container > .arrow{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(100%, -50%);
+    font-size: 2em;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.5s ease;
+    padding: 0.7em 0.5em;
+    border-radius: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-container>.arrow> i{
+    background-color: var(--second-bg-color);
+    color: var(--main-color);
+    border-radius: 50%;
+    padding: 0.5em 0.56em;
+    box-shadow: var(--box-shadow);
+}
+
+.sidebar-container>.arrow> i:hover{
+    color: var(--bg-color);
+    background-color: var(--main-color);
+    box-shadow: 0 0px 16px 0px var(--main-color);;
+}
+
+.sidebar-container .warning-field{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    animation: turnligt 0.5s infinite;
+}
+
+@keyframes turnligt{
+    0%{
+        opacity: 0.5;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.5;
+    }
 }

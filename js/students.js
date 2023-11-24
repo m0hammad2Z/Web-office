@@ -1,8 +1,6 @@
 import { User, Student } from "./models/models.js";
 import { general } from "./general.js";
 
-general.SetSomeDataIfThereIsNo();
-
 let registerd_user;
 function LoadData() {
   general.users =
