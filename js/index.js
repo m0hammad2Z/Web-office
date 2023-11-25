@@ -14,4 +14,4 @@ function LoadData() {
 }
 LoadData();
 
-general.RedirectIfNotAuthorized([general.roles.guest], registerd_user,'../html/welcome.html')
+general.RedirectIfNotAuthorized([general.roles.guest], registerd_user,'.././html/welcome.html')

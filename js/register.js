@@ -14,7 +14,7 @@ function LoadData() {
 }
 LoadData();
 
-general.RedirectIfNotAuthorized([general.roles.admin], registerd_user,'../index.html')
+general.RedirectIfNotAuthorized([general.roles.admin], registerd_user,'.././index.html')
 
 
 const firstNameInput = document.getElementById('firstName');

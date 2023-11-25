@@ -17,7 +17,7 @@ function LoadData() {
 LoadData();
 
 
-general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user,'../html/login.html')
+general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user,'.././html/login.html')
 
 
 
