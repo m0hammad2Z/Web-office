@@ -1,65 +1,64 @@
 {
-    "news": [
-        {
-           "id":0,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":1,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":2,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":3,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":4,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":5,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":6,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":7,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":8,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        },
-        {
-           "id":9,
-           "title":"News Title",
-           "description":"News Description",
-           "imageUrl":"https://source.unsplash.com/random/"
-        }
-     ]
-    
+   "news": [
+       {
+           "id": 1,
+           "title": "Scientists Make Breakthrough in Renewable Energy Research",
+           "description": "A team of researchers has achieved a significant breakthrough in renewable energy, paving the way for more sustainable power sources.",
+           "imageUrl": "https://source.unsplash.com/random/1200x800"
+       },
+       {
+           "id": 2,
+           "title": "Global Efforts to Combat Climate Change Intensify",
+           "description": "Countries around the world are stepping up their efforts to combat climate change, with new initiatives and commitments being announced at the latest international summit.",
+           "imageUrl": "https://source.unsplash.com/random/1200x820"
+       },
+       {
+           "id": 3,
+           "title": "Advancements in Space Exploration Technology",
+           "description": "The latest developments in space exploration technology promise exciting possibilities for future missions beyond our solar system.",
+           "imageUrl": "https://source.unsplash.com/random/1200x812"
+       },
+       {
+           "id": 4,
+           "title": "Innovations in Healthcare Improve Patient Outcomes",
+           "description": "Medical researchers have unveiled groundbreaking innovations that are set to revolutionize healthcare and improve patient outcomes.",
+           "imageUrl": "https://source.unsplash.com/random/1200x813"
+       },
+       {
+           "id": 5,
+           "title": "Educational Initiatives to Address Global Learning Gaps",
+           "description": "Efforts to bridge educational gaps on a global scale are underway, with new initiatives focusing on providing quality education for all.",
+           "imageUrl": "https://source.unsplash.com/random/1202x814"
+       },
+       {
+           "id": 6,
+           "title": "Tech Giants Collaborate on Ethical AI Development",
+           "description": "Major technology companies have joined forces to prioritize and develop ethical artificial intelligence, ensuring responsible use of AI technologies.",
+           "imageUrl": "https://source.unsplash.com/random/1230x833"
+       },
+       {
+           "id": 7,
+           "title": "Culinary Innovation: Chefs Redefining Food Experiences",
+           "description": "Creative chefs are pushing the boundaries of culinary artistry, offering unique and memorable dining experiences for food enthusiasts.",
+           "imageUrl": "https://source.unsplash.com/random/1201x800"
+       },
+       {
+           "id": 8,
+           "title": "Financial Markets React to Global Economic Trends",
+           "description": "The world's financial markets are experiencing shifts in response to current global economic trends, impacting investment strategies and market dynamics.",
+           "imageUrl": "https://source.unsplash.com/random/1210x800"
+       },
+       {
+           "id": 9,
+           "title": "Artificial Intelligence in Everyday Life: Practical Applications",
+           "description": "AI technologies are increasingly integrated into everyday life, with practical applications ranging from smart homes to personalized digital assistants.",
+           "imageUrl": "https://source.unsplash.com/random/1200x810"
+       },
+       {
+           "id": 10,
+           "title": "Exploring the Wonders of Underwater Ecosystems",
+           "description": "Marine biologists and researchers are uncovering the mysteries of underwater ecosystems, discovering new species and understanding the delicate balance of marine life.",
+           "imageUrl": "https://source.unsplash.com/random/1200x811"
+       }
+   ]
 }

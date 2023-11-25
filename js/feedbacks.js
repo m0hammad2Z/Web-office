@@ -14,7 +14,7 @@ function LoadData() {
 LoadData();
 
 // Redirect if not authorized
-general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user,'../html/login.html')
+general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user, '../html/login.html')
 
 
 
@@ -26,7 +26,7 @@ function MakeStudentCard(id, student, title, description) {
     studentCard.setAttribute('feedbackID', id);
 
 
-    let studentNameTD = document.createElement('td'); 
+    let studentNameTD = document.createElement('td');
     studentNameTD.innerHTML = student.firstName + " " + student.lastName;
     studentCard.appendChild(studentNameTD);
 
@@ -37,7 +37,7 @@ function MakeStudentCard(id, student, title, description) {
     let studentDescription = document.createElement('td');
     studentDescription.innerHTML = description;
     studentCard.appendChild(studentDescription);
-    
+
 
     let studentDeleteTD = document.createElement('td');
     let studentDeleteBtn = document.createElement('button');
@@ -48,18 +48,18 @@ function MakeStudentCard(id, student, title, description) {
     studentCard.appendChild(studentDeleteTD);
 
 
-    studentDeleteBtn.addEventListener('click', function(){
+    studentDeleteBtn.addEventListener('click', function () {
         let feedback = new Feedback(id, student.id, title, description, registerd_user.id);
         feedback.delete();
         location.reload();
     }
-    );  
+    );
 
     studentsCards.appendChild(studentCard);
 }
 // list all feedbacks
-for(let feedback of general.feedbacks){
-    let student = general.students.find((obj)=>obj.id == feedback.student_id);
+for (let feedback of general.feedbacks) {
+    let student = general.students.find((obj) => obj.id == feedback.student_id);
     MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
 }
 
@@ -71,7 +71,7 @@ const studentList = document.getElementById('studentSelect');
 const submitBtn = document.getElementById('addFeedbackSubmitBtn');
 
 // fill students list
-for(let student of general.students){
+for (let student of general.students) {
     let option = document.createElement('option');
     option.setAttribute('value', student.id);
     option.innerHTML = student.firstName + " " + student.lastName;
@@ -92,7 +92,7 @@ function closeModal() {
 }
 
 // add feedback
-submitBtn.addEventListener('click', function(e){
+submitBtn.addEventListener('click', function (e) {
     e.preventDefault();
     let student_id = studentList.value;
     let title = document.getElementById('feedbackTitle').value;
@@ -109,10 +109,26 @@ submitBtn.addEventListener('click', function(e){
     let feedback = new Feedback(Number(largerID) + 1, student_id, title, description, createdBy);
     feedback.add();
 
-    let student = general.students.find((obj)=>obj.id == feedback.student_id);
+    let student = general.students.find((obj) => obj.id == feedback.student_id);
     student.feedbacks.push(feedback.id);
     let std = new Student(student.id, student.firstName, student.lastName, student.email, student.password, student.birthDate, student.team_leader_id, student.mobile, student.imgUrl, student.rate, student.absence, student.doneTasks, student.tasks, student.feedbacks);
     std.update();
     MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
     closeModal();
 });
+
+
+// disable add, edit, delete buttons for admin
+setInterval(function () {
+    if (registerd_user.role == general.roles.admin) {
+        document.getElementById("addFeedbackBtn").style.cursor = "not-allowed";
+        document.getElementById("addFeedbackBtn").style.opacity = "0.5";
+        document.getElementById("addFeedbackBtn").disabled = true;
+
+        document.querySelectorAll("#deleteFeedbackBtn").forEach(function (deleteBtn) {
+            deleteBtn.style.cursor = "not-allowed";
+            deleteBtn.style.opacity = "0.5";
+            deleteBtn.disabled = true;
+        });
+    }
+}, 10);
