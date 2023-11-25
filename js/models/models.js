@@ -7,8 +7,8 @@ export function User(
   lastName,
   email,
   password,
-  hiringDate,
   birthDate,
+  hiringDate,
   imgURl,
   mobile
 ) {

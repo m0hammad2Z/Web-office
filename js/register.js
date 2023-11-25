@@ -87,10 +87,6 @@ function validateEmail() {
     {
         setErrorMsg(emailError, 'It is not allowed for the field to be empty, please fill it');
     }
-    else if (emailInput.value === '')
-    {
-        setErrorMsg(firstNameError, 'It is not allowed for the field to be empty, please fill it');
-    }
      else if (!emailRegex.test(emailInput.value)) {
         setErrorMsg(emailError, 'Invalid email format');
     } else {
@@ -100,14 +96,17 @@ function validateEmail() {
 
 // Password Validation
 
-const passwordInput = document.getElementById('password').value;
+const passwordInput = document.getElementById('password');
 function validatePassword () {
    
     const passwordError = document.getElementById('passwordError');
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+    if (passwordInput.value==='')
+    {
+        setErrorMsg(passwordError, 'It is not allowed for the field to be empty, please fill it');
+    }
 
-   if (!passwordRegex.test(passwordInput)) {
-        setErrorMsg(passwordError, 'Invalid password format');
+    else if (passwordInput.value.length<8) {
+        setErrorMsg(passwordError, 'At least 8 char');
     } else {
         successMsg(passwordError);
     }
@@ -118,16 +117,22 @@ const mobileInput = document.getElementById('mobile');
 function validateMobile() {
     const mobileError = document.getElementById('mobileError');
     const mobileRegex = /\d/;
-    const mobileRegex2 = /07[7-9]{1}[0-9]{7}/;
+    const mobileRegex2 = /07[7-9]{1}[0-9]/;
+
     if (mobileInput.value === '')
     {
         setErrorMsg(mobileError, 'It is not allowed for the field to be empty, please fill it');
     }
+   
     else if (!mobileRegex.test(mobileInput.value)) {
         setErrorMsg(mobileError, 'Should not  contain a letter');
      } else if (!mobileRegex2.test(mobileInput.value)) {
         setErrorMsg(mobileError, 'Invalid phone number format ==> (078,079,077(*******))');
-     }
+    }
+    else if (mobileInput.value.length != 10)
+    {
+        setErrorMsg(mobileError, 'Invalid phone number format ==> (078,079,077(*******))');
+    }
      else {
         successMsg(mobileError);
     }
@@ -161,7 +166,7 @@ function successMsg(element) {
 firstNameInput.addEventListener('input', validateFirstName);
 lastNameInput.addEventListener('input', validateLastName);
 emailInput.addEventListener('input', validateEmail);
-// passwordInput.addEventListener('input', validatePassword);
+passwordInput.addEventListener('input', validatePassword);
 mobileInput.addEventListener('input', validateMobile);
 birthDateInput.addEventListener('input', validateHiringDat);
 hiringDateInput.addEventListener('input', validateHiringDat);
@@ -173,7 +178,7 @@ registerBtn.addEventListener('click', (e) => {
     validateFirstName();
     validateLastName();
     validateEmail();
-    // validatePassword();
+     validatePassword();
     validateMobile();
     validateHiringDat();
 
@@ -181,7 +186,7 @@ registerBtn.addEventListener('click', (e) => {
         firstNameError.textContent === '' &&
         lastNameError.textContent === '' &&
         emailError.textContent === '' &&
-        // passwordError.textContent === '' &&
+         passwordError.textContent === '' &&
         mobileError.textContent === ''&&
         hiringDateError.textContent === ''
     ) {
@@ -197,7 +202,5 @@ registerBtn.addEventListener('click', (e) => {
         ru.add();
         alert("User Added Successfully");
     }
-    // else {
-    //     alert("There is an error in the entry, please modify it and try again")
-    // }
+   
 });
