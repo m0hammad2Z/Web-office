@@ -25,8 +25,12 @@ function validateFirstName() {
     const nameRegex2 = /\d/;
     const nameRegex3 = /\s/;
     const nameRegex4 = /^[A-Z]{1}[a-z]{1,}$/;
-     if (nameRegex3.test(firstNameInput.value)) {
-        setErrorMsg(firstNameError, 'not allowed to contain space');
+    if (firstNameInput.value === '')
+    {
+        setErrorMsg(firstNameError, 'It is not allowed for the field to be empty, please fill it');
+    }
+     else if (nameRegex3.test(firstNameInput.value)) {
+        setErrorMsg(firstNameError, 'Not allowed to contain space');
 
     }
     else if (!nameRegex1.test(firstNameInput.value)) {
@@ -51,8 +55,12 @@ function validateLastName() {
     const nameRegex2 = /\d/;
     const nameRegex3 = /\s/;
     const nameRegex4 = /^[A-Z]{1}[a-z]{1,}$/;
-     if (nameRegex3.test(lastNameInput.value)) {
-        setErrorMsg(lastNameError, 'not allowed to contain space');
+    if (lastNameInput.value === '')
+    {
+        setErrorMsg(lastNameError, 'It is not allowed for the field to be empty, please fill it');
+    }
+    else if (nameRegex3.test(lastNameInput.value)) {
+        setErrorMsg(lastNameError, 'Not allowed to contain space');
     }
     else if (!nameRegex1.test(lastNameInput.value)) {
         setErrorMsg(lastNameError, 'Should start with a capital letter');
@@ -75,8 +83,15 @@ const emailInput = document.getElementById('email');
 function validateEmail() {
     const emailError = document.getElementById('emailError');
     const emailRegex = /^[a-zA-Z][a-zA-Z0-9\W^\.]{2,64}@[a-zA-Z0-9]+\.([a-zA-Z0-9]+){2,}$/;
-
-     if (!emailRegex.test(emailInput.value)) {
+    if (emailInput.value === '')
+    {
+        setErrorMsg(emailError, 'It is not allowed for the field to be empty, please fill it');
+    }
+    else if (emailInput.value === '')
+    {
+        setErrorMsg(firstNameError, 'It is not allowed for the field to be empty, please fill it');
+    }
+     else if (!emailRegex.test(emailInput.value)) {
         setErrorMsg(emailError, 'Invalid email format');
     } else {
         successMsg(emailError);
@@ -103,17 +118,35 @@ const mobileInput = document.getElementById('mobile');
 function validateMobile() {
     const mobileError = document.getElementById('mobileError');
     const mobileRegex = /\d/;
-    const mobileRegex2 = /\D/;
-
-     if (!mobileRegex.test(mobileInput.value)) {
+    const mobileRegex2 = /07[7-9]{1}[0-9]{7}/;
+    if (mobileInput.value === '')
+    {
+        setErrorMsg(mobileError, 'It is not allowed for the field to be empty, please fill it');
+    }
+    else if (!mobileRegex.test(mobileInput.value)) {
         setErrorMsg(mobileError, 'Should not  contain a letter');
-     } else if (mobileRegex2.test(mobileInput.value)) {
-        setErrorMsg(mobileError, '');
+     } else if (!mobileRegex2.test(mobileInput.value)) {
+        setErrorMsg(mobileError, 'Invalid phone number format ==> (078,079,077(*******))');
      }
      else {
         successMsg(mobileError);
     }
 }
+
+//Hiring date
+const hiringDateInput = document.getElementById('hiringDate');
+const birthDateInput = document.getElementById('birthDate');
+function validateHiringDat() {
+    const hiringDateError = document.getElementById('hiringDateError');
+    const hiringDate = new Date(hiringDateInput.value);
+    const birthDate = new Date(birthDateInput.value);
+     if (hiringDate <= birthDate) {
+        setErrorMsg(hiringDateError, 'Hiring date must be greater than birth date');
+    } else {
+        successMsg(hiringDateError);
+    }
+}
+
 
 function setErrorMsg(element, message) {
     element.textContent = message;
@@ -125,19 +158,46 @@ function successMsg(element) {
 }
 
 
+firstNameInput.addEventListener('input', validateFirstName);
+lastNameInput.addEventListener('input', validateLastName);
+emailInput.addEventListener('input', validateEmail);
+// passwordInput.addEventListener('input', validatePassword);
+mobileInput.addEventListener('input', validateMobile);
+birthDateInput.addEventListener('input', validateHiringDat);
+hiringDateInput.addEventListener('input', validateHiringDat);
+
 // Register
 const registerBtn = document.getElementById('registerButton');
-registerBtn.addEventListener('click', (e)=>{
+registerBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const mobile = document.getElementById('mobile').value;
-    const role = general.roles.trainer;
-    const birthDate = document.getElementById('birthDate').value;
-    let largerID = general.users.reduce((max, user) => max.id > user.id ? max : user).id;
-    const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(), mobile, "");
-    ru.add();
-    alert("User Added Successfully");
+    validateFirstName();
+    validateLastName();
+    validateEmail();
+    // validatePassword();
+    validateMobile();
+    validateHiringDat();
+
+    if (
+        firstNameError.textContent === '' &&
+        lastNameError.textContent === '' &&
+        emailError.textContent === '' &&
+        // passwordError.textContent === '' &&
+        mobileError.textContent === ''&&
+        hiringDateError.textContent === ''
+    ) {
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const mobile = document.getElementById('mobile').value;
+        const role = general.roles.trainer;
+        const birthDate = document.getElementById('birthDate').value;
+        let largerID = general.users.reduce((max, user) => max.id > user.id ? max : user).id;
+        const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(), mobile, "");
+        ru.add();
+        alert("User Added Successfully");
+    }
+    // else {
+    //     alert("There is an error in the entry, please modify it and try again")
+    // }
 });
