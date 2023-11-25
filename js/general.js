@@ -53,7 +53,7 @@ function SetSomeDataIfThereIsNo() {
       "Admin@123",
       new Date(),
       new Date(),
-      "https://via.placeholder.com/150",
+      "https://api.dicebear.com/7.x/adventurer/svg?seed=admin",
       "07949854994"
     );
     user.add();

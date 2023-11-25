@@ -36,6 +36,15 @@ let sidebarContainer = document.querySelector('.sidebar-container');
 let sidebar = document.querySelector('.sidebar');
 let arrow = document.querySelector('.arrow');
 let addTrainer = document.querySelector('.add-trainer');
+let trainerImage = document.querySelector('.profile-name-image img');
+
+if(registerd_user.image != ""){
+    trainerImage.src = registerd_user.imgURl;
+}
+//check if image can not be loaded
+trainerImage.onerror = function(){
+    trainerImage.src = "https://api.dicebear.com/7.x/adventurer/svg?seed=" + registerd_user.firstName + registerd_user.lastName;
+}
 
 if(registerd_user.role != general.roles.admin){
     addTrainer.style.display = "none";

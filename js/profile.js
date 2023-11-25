@@ -9,6 +9,7 @@ document
     let firstName = document.getElementById("userFirstNameInput").value;
     let lastName = document.getElementById("userLastNameInput").value;
     let email = document.getElementById("userEmailInput").value;
+    let image = document.getElementById("imageURl").value;
     let password = registerd_user.password;
     let role = registerd_user.role;
     let id = registerd_user.id;
@@ -19,10 +20,10 @@ document
       lastName,
       email,
       password,
-      new Date(),
-      new Date(),
-      "",
-      ""
+      registerd_user.birthDate,
+      registerd_user.hiringDate,
+      image,  
+      registerd_user.mobile
     );
     location.reload();
     const isConfirmed = window.confirm(
@@ -59,6 +60,23 @@ function LoadData() {
     registerd_user.firstName;
   document.getElementById("userLastNameInput").value = registerd_user.lastName;
   document.getElementById("userEmailInput").value = registerd_user.email;
+  document.getElementById("imageURl").value = registerd_user.imgURl;
+
+  let image = document.querySelector(".user-image-container .user-image");
+  if (registerd_user.image != "") {
+    image.src = registerd_user.imgURl;
+  }else{
+    image = "https://api.dicebear.com/7.x/adventurer/svg?seed=" + registerd_user.firstName + registerd_user.lastName;
+  }
+  
+  //check if image can not be loaded
+  image.onerror = function () {
+    image.src =
+      "https://api.dicebear.com/7.x/adventurer/svg?seed=" +
+      registerd_user.firstName +
+      registerd_user.lastName;
+  };
+
 }
 LoadData();
 

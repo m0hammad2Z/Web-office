@@ -132,8 +132,11 @@ hr{
 .sidebar img{
     width: 3em;
     height: 3em;
-    object-fit: cover;
     border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--box-shadow);
+    background-color: var(--main-color);
+    
 }
 
 

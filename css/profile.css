@@ -28,7 +28,6 @@ body {
   padding: 20px;
   text-align: center;
   width: 40em;
-  height: 55em;
   border: 2px solid var(--main-color);
   transition: 0.5s ease;
 }
@@ -43,10 +42,12 @@ body {
 }
 
 .user-image {
+  width: 12em;
+  height: 12em;
   border-radius: 50%;
-  width: 30%;
-  height: 50%;
-  border: 4px solid var(--bg-color);
+  object-fit: cover;
+  box-shadow: var(--box-shadow);
+  background-color: var(--main-color);
 }
 
 .form-label {

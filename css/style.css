@@ -27,6 +27,7 @@ html {
   border: none;
   outline: none;
   scroll-behavior: smooth;
+
 }
 
 @media screen and (max-width: 1400px) {
@@ -42,6 +43,31 @@ body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+  animation: animationsforbody 1s ease-in-out;
+}
+
+@keyframes animationsforbody {
+  from{
+    opacity: 0.6;
+  }
+  to{
+    opacity: 1;
+  }
+  0% {
+    transform: scale(0.5);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  75% {
+    transform: scale(1.025);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .header {
