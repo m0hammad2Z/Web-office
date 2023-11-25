@@ -65,7 +65,7 @@ LoadData();
 general.RedirectIfNotAuthorized(
   [general.roles.admin, general.roles.trainer],
   registerd_user,
-  ".././html/login.html"
+  "../html/login.html"
 );
 
 // LoadData();

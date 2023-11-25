@@ -1,5 +1,5 @@
-import { Announcement, Student, User, Feedback } from "./models/models.js";
-import { general } from "./general.js";
+import { Announcement, Student, User, Feedback } from "./js/models/models.js";
+import { general } from "./js/general.js";
 
 general.SetSomeDataIfThereIsNo();
 
@@ -13,4 +13,4 @@ function LoadData() {
     registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
 }
 LoadData();
-general.RedirectIfNotAuthorized([general.roles.guest], registerd_user,'.././html/welcome.html');
+general.RedirectIfNotAuthorized([general.roles.guest], registerd_user,'./html/welcome.html');
