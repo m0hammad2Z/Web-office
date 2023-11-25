@@ -1,3 +1,23 @@
+import { User, Feedback, Student } from "./models/models.js";
+import { general } from "./general.js";
+
+// Data
+let registerd_user;
+function LoadData() {
+    general.users = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
+    general.feedbacks = JSON.parse(general.ReadFromlocalStorage(general.keysObj.feedbacks)) || [];
+    general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
+    general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
+    general.news = general.ReadJson('../data/news.json') || [];
+    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+}
+LoadData();
+
+// Redirect if not authorized
+general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user, '../html/login.html')
+
+
+
 var students = JSON.parse(localStorage.getItem("students")) || [];
 var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 let addTaskBtn = document
@@ -5,14 +25,19 @@ let addTaskBtn = document
   .addEventListener("click", addTask);
 function populateStudentDropdown(elementId, selectedStudents) {
   var studentDropdown = document.getElementById(elementId);
+  try{
   studentDropdown.innerHTML = "";
-
+  }catch(e){
+  }
   students.forEach(function (student) {
     var option = document.createElement("option");
     option.value = student.id;
     option.text = student.firstName + " " + student.lastName;
     option.selected = selectedStudents.includes(student.id);
-    studentDropdown.add(option);
+    try{
+      studentDropdown.add(option);
+    }catch(e){
+    }
   });
 }
 function addTask() {
@@ -185,3 +210,21 @@ document
 populateStudentDropdown("add-student-input", []);
 populateStudentDropdown("editStudentNames", []);
 loadTasks();
+
+
+// disable add, edit, delete todo buttons for admin
+setInterval(function () {
+  if (registerd_user.role == general.roles.admin) {
+    document.getElementById("add-task-btn").style.cursor = "not-allowed";
+    document.getElementById("add-task-btn").style.opacity = "0.5";
+    document.getElementById("add-task-btn").disabled = true;    
+
+    document.querySelector('.saveBtn').style.cursor = "not-allowed";
+    document.querySelector('.saveBtn').style.opacity = "0.5";
+    document.querySelector('.saveBtn').disabled = true;
+
+    document.querySelector('.deleteBtn').style.cursor = "not-allowed";
+    document.querySelector('.deleteBtn').style.opacity = "0.5";
+    document.querySelector('.deleteBtn').disabled = true;
+  }
+}, 10);

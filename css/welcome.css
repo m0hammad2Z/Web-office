@@ -14,7 +14,7 @@
 
 @keyframes vibrateBorderLines{
     0%{
-        outline: 0.25em solid var(--main-color);
+        outline: 0.3em solid var(--main-color);
         outline-offset: 0em;
     }
     90%{
@@ -37,23 +37,6 @@ h1{
     font-size: 3em;
 }
 
-i{
-    font-size: 1.3em;
-    color: var(--main-color);
-    padding-right: 0.5em;
-}
-
-p{
-    color: var(--text-color2);
-}
-
-hr{
-    width: 100%;
-    border: 0.12em solid var(--main-color);
-    border-radius: var(--boder-radiues);
-    opacity: 0.4;
-    margin:0;
-}
 
 .container{
     display: flex;
@@ -166,8 +149,14 @@ hr{
 
 .news-section > .news-cards > .news-card > .top > img{
     width: 100%;
+    height: 20em;
     border-radius: var(--boder-radiues);
-    object-fit: contain;
+    object-fit: cover;
+}
+
+.news-section > .news-cards > .news-card:hover > .top > img{
+    opacity: 0.4;
+    transition: all 0.5s;
 }
 
 /* announcements */
@@ -206,6 +195,8 @@ hr{
     background-color: var(--second-bg-color);
     padding: 1.5em 3em;
     border-radius: var(--boder-radiues);   
+    box-shadow: var(--box-shadow);
+    width: 60vw;
 }
 
 .modal-content > .modal-header{
@@ -222,8 +213,14 @@ hr{
     text-decoration-color: var(--main-color);
     text-decoration-thickness: 0.2em;
     text-underline-offset: 0.6em; 
+    font-size: 2.2em;
 }
 
+.modal-content > .modal-body p{
+    font-size: 1.8em;
+    line-height: 1.5;
+    Overflow: hidden;    
+}
 .modal-content > .modal-header .close{
     font-size: 2em;
     color: var(--main-color);
@@ -247,4 +244,25 @@ hr{
     object-fit: cover;
     height: 40em;
     width: 100%;
+    opacity: 0.8;
+}
+
+
+@keyframes handanimation{
+    0% {transform: rotateZ(15deg);}
+    50% {transform: rotateZ(-20deg);}
+    100% {transform: rotateZ(15deg);}
+}
+
+@-webkit-keyframes handanimation{
+    0% {transform: rotate(-15deg);}
+    50% {transform: rotate(15deg);}
+    100% {transform: rotate(-15deg);}
+}
+
+#hand{
+    display: inline-block;
+    transform-origin: 100% 100%;
+    animation: handanimation 1.3s infinite;
+    text-decoration: none;
 }

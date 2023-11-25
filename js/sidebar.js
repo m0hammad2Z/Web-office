@@ -17,8 +17,11 @@ function LoadData() {
     sidebarRole.textContent = registerd_user.role.toUpperCase();
     sidebarLogout.style.cursor = "pointer"
     sidebarLogout.addEventListener('click', ()=>{
-        localStorage.removeItem('registerd_user');
-        location.reload();
+        if(confirm("Are you sure you want to logout?") == true){
+            localStorage.removeItem('registerd_user');
+            location.reload();
+        }       
+
     })
     sidebareProfile.addEventListener('click', ()=>{
         location.href = "../html/profile.html";

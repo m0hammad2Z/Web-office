@@ -230,3 +230,24 @@ function addRate(studentId) {
   localStorage.setItem("students", JSON.stringify(students));
   loadStudentsIntoTable();
 }
+
+
+// disable add, edit, delete buttons for admin
+setInterval(function () {
+if (registerd_user.role == general.roles.admin) {
+  document.getElementById("addStudentForm").style.cursor = "not-allowed";
+  document.getElementById("addStudentForm").style.opacity = "0.5";  
+  document.getElementById("addStudentForm").disabled = true;
+
+  document.querySelectorAll(".editBtn").forEach(function (editBtn) {
+    editBtn.style.cursor = "not-allowed";
+    editBtn.style.opacity = "0.5";
+    editBtn.disabled = true;
+  });
+  document.querySelectorAll(".deleteBtn").forEach(function (deleteBtn) {
+    deleteBtn.style.cursor = "not-allowed";
+    deleteBtn.style.opacity = "0.5";
+    deleteBtn.disabled = true;
+  });
+}
+}, 10);
