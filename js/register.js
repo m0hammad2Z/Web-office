@@ -80,16 +80,18 @@ function validateLastName() {
 
 // validate email
 const emailInput = document.getElementById('email');
+const emailError = document.getElementById('emailError');
 function validateEmail() {
-    const emailError = document.getElementById('emailError');
     const emailRegex = /^[a-zA-Z][a-zA-Z0-9\W^\.]{2,64}@[a-zA-Z0-9]+\.([a-zA-Z0-9]+){2,}$/;
     if (emailInput.value === '')
     {
         setErrorMsg(emailError, 'It is not allowed for the field to be empty, please fill it');
     }
-     else if (!emailRegex.test(emailInput.value)) {
+    else if (!emailRegex.test(emailInput.value)) {
         setErrorMsg(emailError, 'Invalid email format');
-    } else {
+    }
+            
+     else {
         successMsg(emailError);
     }
 }
@@ -114,8 +116,8 @@ function validatePassword () {
 
 // Mobile number Validation
 const mobileInput = document.getElementById('mobile');
+const mobileError = document.getElementById('mobileError');
 function validateMobile() {
-    const mobileError = document.getElementById('mobileError');
     const mobileRegex = /\d/;
     const mobileRegex2 = /07[7-9]{1}[0-9]/;
 
@@ -152,6 +154,21 @@ function validateHiringDat() {
     }
 }
 
+//birth date
+
+const birthDateError = document.getElementById('birthDateError');
+function validateBirthDate() {
+    const birthDate = new Date(birthDateInput.value);
+    const currentDate = new Date();
+    const age = currentDate.getFullYear() - birthDate.getFullYear();
+  
+     if (age < 18) {
+        setErrorMsg(birthDateError, 'Trainer age date must be greater than 18');
+    } else {
+        successMsg(birthDateError);
+    }
+}
+
 
 function setErrorMsg(element, message) {
     element.textContent = message;
@@ -169,7 +186,8 @@ emailInput.addEventListener('input', validateEmail);
 passwordInput.addEventListener('input', validatePassword);
 mobileInput.addEventListener('input', validateMobile);
 birthDateInput.addEventListener('input', validateHiringDat);
-hiringDateInput.addEventListener('input', validateHiringDat);
+hiringDateInput.addEventListener('input', validateHiringDat); 
+birthDateInput.addEventListener('input', validateBirthDate);
 
 // Register
 const registerBtn = document.getElementById('registerButton');
@@ -181,24 +199,46 @@ registerBtn.addEventListener('click', (e) => {
      validatePassword();
     validateMobile();
     validateHiringDat();
+    validateBirthDate();
+// email duplicate
+    const usersArray = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users));
+    const emailIndex =usersArray.findIndex((e)=>emailInput.value === e.email)
+    if (emailIndex!=-1)
+    {
+        setErrorMsg(emailError,'There is email duplicate,please choose another one');
+    }
+
+    // phone number duplicate
+    const mobileIndex = usersArray.findIndex((m) => mobileInput.value == m.mobile)
+
+    if (mobileIndex!=-1)
+    {
+        setErrorMsg(mobileError,'There is phone number duplicate, please choose another one');
+    }
+
 
     if (
         firstNameError.textContent === '' &&
         lastNameError.textContent === '' &&
         emailError.textContent === '' &&
-         passwordError.textContent === '' &&
+        passwordError.textContent === '' &&
         mobileError.textContent === ''&&
-        hiringDateError.textContent === ''
+        hiringDateError.textContent === '' &&
+        birthDateError.textContent ===''
+        
+   
+        
     ) {
         const firstName = document.getElementById('firstName').value;
         const lastName = document.getElementById('lastName').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const mobile = document.getElementById('mobile').value;
+        const imageUrl = document.getElementById('imgURL').value;
         const role = general.roles.trainer;
         const birthDate = document.getElementById('birthDate').value;
         let largerID = general.users.reduce((max, user) => max.id > user.id ? max : user).id;
-        const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(), mobile, "");
+        const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(),imageUrl,mobile);
         ru.add();
         alert("User Added Successfully");
     }
