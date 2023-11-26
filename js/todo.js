@@ -134,7 +134,8 @@ function showTaskDetails(taskIndex) {
   var task = tasks[taskIndex];
   var studentIds = task.studentIds;
 
-  detailsContent.innerHTML = `
+  if(registerd_user.role != general.roles.admin){
+    detailsContent.innerHTML = `
     <h2>Task Details</h2>
     <div class="taskEdit">
       <p><strong>Task:</strong> <input type="text" id="editTaskName" value="${
@@ -149,8 +150,23 @@ function showTaskDetails(taskIndex) {
       <br/>
       <button class="deleteBtn">Delete Task</button>
     </div>
+  `
+    }else{
+    detailsContent.innerHTML = `
+    <h2>Task Details</h2>
+    <div class="taskEdit">
+      <p><strong>Task:</strong> <input type="text" id="editTaskName" value="${
+        task.task
+      }"></p>  
+      <p><strong>Assigned Students:</strong></p>
+      <select id="editStudentNames" multiple>
+        ${generateStudentOptions(studentIds)}
+      </select>
+    </div>
   `;
+  }
 
+  if(registerd_user.role != general.roles.admin){
   var saveBtn = detailsContent.querySelector(".saveBtn");
   var deleteBtn = detailsContent.querySelector(".deleteBtn");
 
@@ -161,6 +177,7 @@ function showTaskDetails(taskIndex) {
   deleteBtn.addEventListener("click", function () {
     deleteTask(taskIndex);
   });
+}
 
   detailsPopup.style.display = "block";
   overlay.classList.add("active");
@@ -213,18 +230,7 @@ loadTasks();
 
 
 // disable add, edit, delete todo buttons for admin
-setInterval(function () {
-  if (registerd_user.role == general.roles.admin) {
-    document.getElementById("add-task-btn").style.cursor = "not-allowed";
-    document.getElementById("add-task-btn").style.opacity = "0.5";
-    document.getElementById("add-task-btn").disabled = true;    
+if (registerd_user.role == general.roles.admin) {
+  document.querySelector('.tasks-input-row').style.display = "none";   
 
-    document.querySelector('.saveBtn').style.cursor = "not-allowed";
-    document.querySelector('.saveBtn').style.opacity = "0.5";
-    document.querySelector('.saveBtn').disabled = true;
-
-    document.querySelector('.deleteBtn').style.cursor = "not-allowed";
-    document.querySelector('.deleteBtn').style.opacity = "0.5";
-    document.querySelector('.deleteBtn').disabled = true;
-  }
-}, 10);
+}

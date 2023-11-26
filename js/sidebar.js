@@ -31,40 +31,31 @@ LoadData();
 
 
 // Design
-let sidebarFlag = false;
 let sidebarContainer = document.querySelector('.sidebar-container');
 let sidebar = document.querySelector('.sidebar');
-let arrow = document.querySelector('.arrow');
 let addTrainer = document.querySelector('.add-trainer');
 let trainerImage = document.querySelector('.profile-name-image img');
 
 if(registerd_user.image != ""){
     trainerImage.src = registerd_user.imgURl;
 }
-//check if image can not be loaded
-trainerImage.onerror = function(){
-    trainerImage.src = "https://api.dicebear.com/7.x/adventurer/svg?seed=" + registerd_user.firstName + registerd_user.lastName;
-}
+
 
 if(registerd_user.role != general.roles.admin){
     addTrainer.style.display = "none";
 }
 
 
-sidebarContainer.style.transform = 'translate(-99%)';
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+sidebarOverlay.addEventListener('click', ()=>{
+    sidebarContainer.style.opacity = "0";
+    sidebarContainer.style.visibility = "hidden";
+    sidebar.style.transform = "translateY(-100%)";
+})
 
-arrow.addEventListener('click', ()=>{
-    if(!sidebarFlag){
-        sidebarContainer.style.transform = 'translate(-99%)';
-        sidebarFlag = true;
-        
-    } else{
-        sidebarContainer.style.transform = 'translate(0)';
-        sidebarFlag = false
-    };
-});
-
-sidebar.addEventListener('click', ()=>{
-    sidebarContainer.style.transform = 'translate(-99%)';
-    sidebarFlag = true;
-});
+const sidebarBurgerToggle = document.querySelector('.sidebar-burger-toggle');
+sidebarBurgerToggle.addEventListener('click', ()=>{
+    sidebarContainer.style.opacity = "1";
+    sidebarContainer.style.visibility = "visible";
+    sidebar.style.transform = "translateY(0)";
+})

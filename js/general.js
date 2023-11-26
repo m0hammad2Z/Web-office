@@ -91,7 +91,18 @@ function RedirectIfNotAuthorized(rolesAllowed, registerd_user, path) {
   window.location.href = path;
 }
 
+function searchByName(name, arr) {
+  let result = [];
+  for (let item of arr) {
+    if (item.firstName.toLowerCase().includes(name.toLowerCase())) {
+      result.push(item);
+    }
+  }
+  return result || [];
+}
+
 export let general = {
+  searchByName,
   RedirectIfNotAuthorized,
   SetSomeDataIfThereIsNo,
   ReadJson,

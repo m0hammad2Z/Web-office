@@ -43,10 +43,10 @@ body {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
-  animation: animationsforbody 1s ease-in-out;
+  /* animation: animationsforbody 1s ease-in-out; */
 }
 
-@keyframes animationsforbody {
+/* @keyframes animationsforbody {
   from{
     opacity: 0.6;
   }
@@ -68,7 +68,7 @@ body {
   100% {
     transform: scale(1);
   }
-}
+} */
 
 .header {
   position: fixed;

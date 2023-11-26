@@ -19,8 +19,9 @@ general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], re
 
 
 // Make Student Card that contains student name, feedback title, feedback description and delete button.
+const studentsCards = document.querySelector('.students-cards');
 function MakeStudentCard(id, student, title, description) {
-    const studentsCards = document.querySelector('.students-cards');
+    
     let studentCard = document.createElement('tr');
 
     studentCard.setAttribute('feedbackID', id);
@@ -45,15 +46,16 @@ function MakeStudentCard(id, student, title, description) {
     studentDeleteBtn.setAttribute('id', 'deleteFeedbackBtn');
     studentDeleteBtn.innerHTML = "Delete Feedback";
     studentDeleteTD.appendChild(studentDeleteBtn);
+    if(registerd_user.role == general.roles.trainer){
     studentCard.appendChild(studentDeleteTD);
+    }
 
 
     studentDeleteBtn.addEventListener('click', function () {
         let feedback = new Feedback(id, student.id, title, description, registerd_user.id);
         feedback.delete();
         location.reload();
-    }
-    );
+    });
 
     studentsCards.appendChild(studentCard);
 }
@@ -62,6 +64,20 @@ for (let feedback of general.feedbacks) {
     let student = general.students.find((obj) => obj.id == feedback.student_id);
     MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
 }
+
+document.getElementById('searchInput').addEventListener('keyup', function (e) {
+    let searchStr = e.target.value;
+    studentsCards.innerHTML = "";
+    if(studentsCards){
+    for (let feedback of general.feedbacks) {
+        general.searchByName(searchStr, general.students).forEach(function (student) {
+            if (feedback.student_id == student.id) {
+                MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
+            }
+        });
+    }
+    }
+});
 
 // Modal Code
 const modal = document.getElementById('addFeedbackModal');
@@ -77,6 +93,7 @@ for (let student of general.students) {
     option.innerHTML = student.firstName + " " + student.lastName;
     studentList.appendChild(option);
 }
+
 
 modalBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click', closeModal);
@@ -118,17 +135,13 @@ submitBtn.addEventListener('click', function (e) {
 });
 
 
-// disable add, edit, delete buttons for admin
-setInterval(function () {
-    if (registerd_user.role == general.roles.admin) {
-        document.getElementById("addFeedbackBtn").style.cursor = "not-allowed";
-        document.getElementById("addFeedbackBtn").style.opacity = "0.5";
-        document.getElementById("addFeedbackBtn").disabled = true;
 
-        document.querySelectorAll("#deleteFeedbackBtn").forEach(function (deleteBtn) {
-            deleteBtn.style.cursor = "not-allowed";
-            deleteBtn.style.opacity = "0.5";
-            deleteBtn.disabled = true;
-        });
-    }
-}, 10);
+// delete add, edit, delete buttons for admin
+if(registerd_user.role == general.roles.admin){
+    document.getElementById("addFeedbackBtn").style.display = "none";
+    document.querySelector(".delete-btn-form").style.display = "none";
+
+    document.querySelectorAll("#deleteFeedbackBtn").forEach(function (deleteBtn) {
+        deleteBtn.style.display = "none";
+    });
+}

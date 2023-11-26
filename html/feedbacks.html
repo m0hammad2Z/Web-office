@@ -19,8 +19,12 @@
             <div class="students-Container">
                 <div class="students-Containert-Header">
                     <h1>Feedbacks</h1>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search...">
+                    </div>
                     <button class="btn" id="addFeedbackBtn">Add Feedback</button>
                 </div>
+
                 <div class="table-Container">
                     <table>
                         <thead>
@@ -28,7 +32,7 @@
                                 <th class="thead">Student Name</th>
                                 <th class="thead">Feedback</th>
                                 <th class="thead">Descreption</th>
-                                <th class="thead" >Delete</th>
+                                <th class="delete-btn-form" >Delete</th>
                             </tr>
                         </thead>
                         <tbody class="students-cards">
@@ -66,45 +70,46 @@
             </div>
             </div>
 
-            <div class="sidebar-container">
-                <div class="sidebar">
-                    <div class="links-field">
-                        <div class="logo">
-                            <h1>Web Office</h1>
-                        </div>
-                        <a href="welcome.html"><i class="fas fa-home"></i>Dashboard</a>
-                        <a href="students.html"><i class="fas fa-users"></i>Students</a>
-                        <a href="todo.html"><i class="fas fa-check"></i>Todo</a> 
-                        <a href="feedbacks.html"><i class="fas fa-comment"></i>Feedbacks</a>
-                    </div>
-    
-                    <div class="warning-field">
-                        <h4>Click here to close the sidebar</h4>
-                    </div>
-    
-                    <div class="profile-field">
-                        <a href="../html/register.html" class="add-trainer"><i class="fas fa-plus"></i>Add Trainer</a>
-                        <div class="profile" >
-                            <div class="profile-name-image" id="sidebare-profile">
-                                <div>
-                                    <img src="https://th.bing.com/th/id/OIP.CVfz0e-F_vCMJ9428mFlhwHaD4?w=768&h=402&rs=1&pid=ImgDetMain" alt="profile">
-                                </div>
-                                <div>
-                                    <h4 id="sidebar-user-name"></h4>
-                                    <p id="sidebar-role"></p>
-                                </div>
-                            </div>
-                            <div>
-                                <i class="fas fa-sign-out-alt" id="sidebar-logout"></i>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Sidebar -->
+    <div class="sidebar-container">
+        <div class="sidebar">
+            <div class="links-field">
+                <div class="logo">
+                    <h1>Web Office</h1>
                 </div>
-    
-                <div class="arrow">
-                    <i class="fas fa-arrow-right"></i>
+                <a href="welcome.html"><i class="fas fa-home"></i>Dashboard</a>
+                <a href="students.html"><i class="fas fa-users"></i>Students</a>
+                <a href="todo.html"><i class="fas fa-check"></i>Todo</a> 
+                <a href="feedbacks.html"><i class="fas fa-comment"></i>Feedbacks</a>
+            </div>
+
+
+            <div class="profile-field">
+                <a href="../html/register.html" class="add-trainer"><i class="fas fa-plus"></i>Add Trainer</a>
+                <div class="profile" >
+                    <div class="profile-name-image" id="sidebare-profile">
+                        <div>
+                            <img src="https://th.bing.com/th/id/OIP.CVfz0e-F_vCMJ9428mFlhwHaD4?w=768&h=402&rs=1&pid=ImgDetMain" alt="profile">
+                        </div>
+                        <div>
+                            <h4 id="sidebar-user-name"></h4>
+                            <p id="sidebar-role"></p>
+                        </div>
+                    </div>
+                    <div>
+                        <i class="fas fa-sign-out-alt" id="sidebar-logout"></i>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="sidebar-overlay">
+        </div>
+    </div>
+
+    <div class="sidebar-burger-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <!-- End Sidebar -->
     
             
 

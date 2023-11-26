@@ -14,7 +14,8 @@
 </head>
 
 <body>
-    <div class="sidebar-container">
+      <!-- Sidebar -->
+      <div class="sidebar-container">
         <div class="sidebar">
             <div class="links-field">
                 <div class="logo">
@@ -26,9 +27,6 @@
                 <a href="feedbacks.html"><i class="fas fa-comment"></i>Feedbacks</a>
             </div>
 
-            <div class="warning-field">
-                <h4>Click here to close the sidebar</h4>
-            </div>
 
             <div class="profile-field">
                 <a href="../html/register.html" class="add-trainer"><i class="fas fa-plus"></i>Add Trainer</a>
@@ -48,17 +46,22 @@
                 </div>
             </div>
         </div>
-
-        <div class="arrow">
-            <i class="fas fa-arrow-right"></i>
+        <div class="sidebar-overlay">
         </div>
     </div>
+    <div class="sidebar-burger-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <!-- End Sidebar -->
 
     
     <div class="students">
         <div class="students-Container">
             <div class="students-Containert-Header">
                 <h1>Students</h1>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                </div>
                 <button class="btn" id="addStudentForm">Add Student</button>
             </div>
             <div class="table-Container">

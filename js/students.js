@@ -97,8 +97,19 @@ function addStudent() {
   closePopupForm();
   loadStudentsIntoTable();
 }
+
+document.getElementById('searchInput').addEventListener('keyup', function (e) {
+  loadStudentsIntoTable();
+})
 function loadStudentsIntoTable() {
-  const students = JSON.parse(localStorage.getItem("students")) || [];
+  let searchStr = document.getElementById('searchInput').value;
+  let students = JSON.parse(localStorage.getItem("students")) || [];
+  if (searchStr) {
+    students = general.searchByName(searchStr, students);
+  }
+
+
+
   var tableBody = document.querySelector("table tbody");
   tableBody.innerHTML = "";
   students.forEach(function (student) {
@@ -168,6 +179,7 @@ function loadStudentsIntoTable() {
     });
   });
 }
+
 function editStudent(studentId) {
   var students = JSON.parse(localStorage.getItem("students")) || [];
   var studentToEdit = students.find((student) => student.id === studentId);
@@ -256,8 +268,8 @@ function addRate(studentId) {
 }
 
 
-// disable add, edit, delete buttons for admin
-setInterval(function () {
+
+// Delete add, edit, delete buttons for admin
 if (registerd_user.role == general.roles.admin) {
   document.getElementById("addStudentForm").style.display = "none";
 
@@ -274,8 +286,4 @@ if (registerd_user.role == general.roles.admin) {
 
   document.getElementById('edit-field').style.display = "none";
   document.getElementById('del-field').style.display = "none";
-
-
-
 }
-}, 10);
