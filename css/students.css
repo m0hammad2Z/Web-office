@@ -26,8 +26,7 @@ body {
 }
 .table-Container {
   height: 50em;
-  overflow: scroll;
-  overflow-x: hidden;
+  overflow: auto;
 }
 .students-Container {
   width: 66vw;

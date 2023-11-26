@@ -35,30 +35,7 @@
            "title": "Tech Giants Collaborate on Ethical AI Development",
            "description": "Major technology companies have joined forces to prioritize and develop ethical artificial intelligence, ensuring responsible use of AI technologies.",
            "imageUrl": "https://source.unsplash.com/random/1230x833"
-       },
-       {
-           "id": 7,
-           "title": "Culinary Innovation: Chefs Redefining Food Experiences",
-           "description": "Creative chefs are pushing the boundaries of culinary artistry, offering unique and memorable dining experiences for food enthusiasts.",
-           "imageUrl": "https://source.unsplash.com/random/1201x800"
-       },
-       {
-           "id": 8,
-           "title": "Financial Markets React to Global Economic Trends",
-           "description": "The world's financial markets are experiencing shifts in response to current global economic trends, impacting investment strategies and market dynamics.",
-           "imageUrl": "https://source.unsplash.com/random/1210x800"
-       },
-       {
-           "id": 9,
-           "title": "Artificial Intelligence in Everyday Life: Practical Applications",
-           "description": "AI technologies are increasingly integrated into everyday life, with practical applications ranging from smart homes to personalized digital assistants.",
-           "imageUrl": "https://source.unsplash.com/random/1200x810"
-       },
-       {
-           "id": 10,
-           "title": "Exploring the Wonders of Underwater Ecosystems",
-           "description": "Marine biologists and researchers are uncovering the mysteries of underwater ecosystems, discovering new species and understanding the delicate balance of marine life.",
-           "imageUrl": "https://source.unsplash.com/random/1200x811"
        }
+
    ]
 }

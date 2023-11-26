@@ -23,15 +23,23 @@ general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], re
 
 
 //Welcome section
-function AssignName(){
+function AssignNameAndImage(){
     let name = document.getElementById('name');
+    let image = document.querySelector('.welcome-section img');
     try{
         name.innerHTML = registerd_user.firstName;
+        image.src = registerd_user.imgURl;
     }catch{
         name.innerHTML = "Guest";
+        image.src = "https://api.dicebear.com/7.x/adventurer/svg?seed=guest";
+    }
+
+    //check if image can not be loaded
+    image.onerror = function(){
+        image.src = "https://api.dicebear.com/7.x/adventurer/svg?seed=guest";
     }
 }
-AssignName();
+AssignNameAndImage();
 
 // Statistic cards
 function MakeStatisticCard(innerHTML) {

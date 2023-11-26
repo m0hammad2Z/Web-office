@@ -14,7 +14,7 @@ function LoadData() {
 }
 LoadData();
 
-general.RedirectIfNotAuthorized([general.roles.admin], registerd_user,'../index.html')
+general.RedirectIfNotAuthorized([general.roles.admin], registerd_user,'../html/welcome.html');
 
 
 const firstNameInput = document.getElementById('firstName');
@@ -234,11 +234,13 @@ registerBtn.addEventListener('click', (e) => {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const mobile = document.getElementById('mobile').value;
-        const imageUrl = document.getElementById('imgURL').value;
+
+        const imageUrl = document.getElementById('imgURL').value || "https://api.dicebear.com/7.x/adventurer/svg?seed=" + firstName + lastName;
         const role = general.roles.trainer;
         const birthDate = document.getElementById('birthDate').value;
         let largerID = general.users.reduce((max, user) => max.id > user.id ? max : user).id;
-        const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(),imageUrl,mobile);
+        const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(), imageUrl, mobile);
+
         ru.add();
         alert("User Added Successfully");
     }
