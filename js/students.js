@@ -103,32 +103,56 @@ function loadStudentsIntoTable() {
   tableBody.innerHTML = "";
   students.forEach(function (student) {
     var row = tableBody.insertRow();
-    row.innerHTML = `
-    <td>${student.firstName} ${student.lastName}</td>
-    <td>${
-      student.rate ? student.rate : 0
-    }/100&nbsp; <button class="rateBtn plusBtn" data-student-id="${
-      student.id
-    }">+</button></td>
-    <td>${
-      student.absence ? student.absence : 0
-    }&nbsp;&nbsp; <button class="addAbsenceBtn plusBtn" data-student-id="${
-      student.id
-    }">+</button></td>
-    <td>${
-      student.doneTasks ? student.doneTasks : 0
-    }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${
-      student.id
-    }">+</button></td>
-    <td>${student.tasks.length ? student.tasks.length : "No Tasks"}</td>
-    <td>${student.feedbacks.length ? student.feedbacks : "No Feedbacks"}</td>
-    <td><button class="editBtn" data-student-id="${
-      student.id
-    }">Edit</button></td>
-    <td><button class="deleteBtn" data-student-id="${
-      student.id
-    }">Delete</button>
-`;
+    if(registerd_user.role == general.roles.admin){
+      row.innerHTML = `
+      <td>${student.firstName} ${student.lastName}</td>
+      <td>${
+        student.rate ? student.rate : 0
+      }/100&nbsp; <button class="rateBtn plusBtn" data-student-id="${
+        student.id
+      }">+</button></td>
+      <td>${
+        student.absence ? student.absence : 0
+      }&nbsp;&nbsp; <button class="addAbsenceBtn plusBtn" data-student-id="${
+        student.id
+      }">+</button></td>
+      <td>${
+        student.doneTasks ? student.doneTasks : 0
+      }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${
+        student.id
+      }">+</button></td>
+      <td>${student.tasks.length ? student.tasks.length : "No Tasks"}</td>
+      <td>${student.feedbacks.length ? student.feedbacks.length : "No Feedbacks"}</td> `;
+    }else if (registerd_user.role == general.roles.trainer) {
+      row.innerHTML = `
+      <td>${student.firstName} ${student.lastName}</td>
+      <td>${
+        student.rate ? student.rate : 0
+      }/100&nbsp; <button class="rateBtn plusBtn" data-student-id="${
+        student.id
+      }">+</button></td>
+      <td>${
+        student.absence ? student.absence : 0
+      }&nbsp;&nbsp; <button class="addAbsenceBtn plusBtn" data-student-id="${
+        student.id
+      }">+</button></td>
+      <td>${
+        student.doneTasks ? student.doneTasks : 0
+      }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${
+        student.id
+      }">+</button></td>
+      <td>${student.tasks.length ? student.tasks.length : "No Tasks"}</td>
+      <td>${student.feedbacks.length ? student.feedbacks.length : "No Feedbacks"}</td>
+  
+      <td><button class="editBtn" data-student-id="${
+        student.id
+      }">Edit</button></td>
+      <td><button class="deleteBtn" data-student-id="${
+        student.id
+      }">Delete</button>`;
+      
+    }
+
   });
   document.querySelectorAll(".editBtn").forEach(function (editBtn) {
     editBtn.addEventListener("click", function () {
@@ -235,19 +259,23 @@ function addRate(studentId) {
 // disable add, edit, delete buttons for admin
 setInterval(function () {
 if (registerd_user.role == general.roles.admin) {
-  document.getElementById("addStudentForm").style.cursor = "not-allowed";
-  document.getElementById("addStudentForm").style.opacity = "0.5";  
-  document.getElementById("addStudentForm").disabled = true;
+  document.getElementById("addStudentForm").style.display = "none";
 
   document.querySelectorAll(".editBtn").forEach(function (editBtn) {
-    editBtn.style.cursor = "not-allowed";
-    editBtn.style.opacity = "0.5";
-    editBtn.disabled = true;
+    editBtn.style.display = "none";
   });
   document.querySelectorAll(".deleteBtn").forEach(function (deleteBtn) {
-    deleteBtn.style.cursor = "not-allowed";
-    deleteBtn.style.opacity = "0.5";
-    deleteBtn.disabled = true;
+    deleteBtn.style.display = "none";
   });
+
+  document.querySelectorAll(".plusBtn").forEach(function (deleteBtn) {
+    deleteBtn.style.display = "none";
+  });
+
+  document.getElementById('edit-field').style.display = "none";
+  document.getElementById('del-field').style.display = "none";
+
+
+
 }
 }, 10);
