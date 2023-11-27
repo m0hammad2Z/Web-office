@@ -34,6 +34,7 @@ LoadData();
 let sidebarContainer = document.querySelector('.sidebar-container');
 let sidebar = document.querySelector('.sidebar');
 let addTrainer = document.querySelector('.add-trainer');
+let trainerControl = document.querySelector('.addTrainer');
 let trainerImage = document.querySelector('.profile-name-image img');
 
 if(registerd_user.image != ""){
@@ -41,8 +42,10 @@ if(registerd_user.image != ""){
 }
 
 
+
 if(registerd_user.role != general.roles.admin){
     addTrainer.style.display = "none";
+    trainerControl.style.display = "none";
 }
 
 

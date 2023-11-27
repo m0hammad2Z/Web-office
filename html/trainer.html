@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="../css//style.css">
-    <link rel="stylesheet" href="../css/students.css">
+    <link rel="stylesheet" href="../css/trainer.css">
     <link rel="stylesheet" href="../css/seidebar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         crossorigin="anonymous">
@@ -32,6 +32,8 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar-container">
+           
+
         <div class="sidebar">
             <div class="links-field">
                 <div class="logo">
@@ -72,13 +74,11 @@
     </div>
     <!-- End Sidebar -->
 
-
-    <div class="students">
-        <div class="students-Container">
+    <div class="trainer">
+        <div class="trainer-Container">
+            <div class="trainers-Containert-Header">
+                <h1>Trainers</h1>
             
-            <div class="students-Containert-Header">
-                <h1>Students</h1>
-                <button class="btn" id="addStudentForm">Add Student</button>
             </div>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search...">
@@ -87,12 +87,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th class="thead">Student Name</th>
-                            <th class="thead">Rate</th>
-                            <th class="thead"># Absence</th>
-                            <th class="thead">Done Tasks</th>
-                            <th class="thead"># Of Tasks</th>
-                            <th class="thead">Feedback</th>
+                            <th class="thead">Trainer Name</th>
                             <th class="thead" id="edit-field">Edit</th>
                             <th class="thead" id="del-field">Delete</th>
                         </tr>
@@ -102,8 +97,9 @@
             </div>
         </div>
     </div>
+
     <div id="popupForm" class="popup" style="display: none;">
-        <form id="studentForm">
+        <form id="trainerForm">
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" required>
 
@@ -125,12 +121,12 @@
             <label for="imgUrl">Image URL:</label>
             <input type="url" id="imgUrl" name="imgUrl" required>
 
-            <button type="button" id="addStudentBtn">Add Student</button>
+            <button type="button" id="submitBtn">Submit</button>
         </form>
         <span class="close" id="closeX">&times;</span>
     </div>
     <div class="overlay" id="overlay"></div>
-    <script type="module" src="../js/students.js"></script>
+    <script type="module" src="../js/trainer.js"></script>
     <script type="module" src="../js/models/models.js"></script>
     <script type="module" src="../js/sidebar.js"></script>
 </body>
