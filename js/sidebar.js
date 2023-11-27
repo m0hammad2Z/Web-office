@@ -5,7 +5,7 @@ import { general } from "./general.js";
 //data
 let registerd_user;
 function LoadData() {
-     registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+     registerd_user = JSON.parse(sessionStorage.getItem('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
    
      //DOM
     let sidebarUserName = document.getElementById('sidebar-user-name'); 
@@ -18,7 +18,7 @@ function LoadData() {
     sidebarLogout.style.cursor = "pointer"
     sidebarLogout.addEventListener('click', ()=>{
         if(confirm("Are you sure you want to logout?") == true){
-            localStorage.removeItem('registerd_user');
+            sessionStorage.removeItem('registerd_user');
             location.reload();
         }       
 

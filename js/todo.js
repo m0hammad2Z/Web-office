@@ -4,12 +4,12 @@ import { general } from "./general.js";
 // Data
 let registerd_user;
 function LoadData() {
-    general.users = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
-    general.feedbacks = JSON.parse(general.ReadFromlocalStorage(general.keysObj.feedbacks)) || [];
-    general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
-    general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
-    general.news = general.ReadJson('../data/news.json') || [];
-    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+  general.users = JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
+  general.feedbacks = JSON.parse(general.ReadFromlocalStorage(general.keysObj.feedbacks)) || [];
+  general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
+  general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
+  general.news = general.ReadJson('../data/news.json') || [];
+  registerd_user = JSON.parse(sessionStorage.getItem('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
 }
 LoadData();
 
@@ -25,18 +25,18 @@ let addTaskBtn = document
   .addEventListener("click", addTask);
 function populateStudentDropdown(elementId, selectedStudents) {
   var studentDropdown = document.getElementById(elementId);
-  try{
-  studentDropdown.innerHTML = "";
-  }catch(e){
+  try {
+    studentDropdown.innerHTML = "";
+  } catch (e) {
   }
   students.forEach(function (student) {
     var option = document.createElement("option");
     option.value = student.id;
     option.text = student.firstName + " " + student.lastName;
     option.selected = selectedStudents.includes(student.id);
-    try{
+    try {
       studentDropdown.add(option);
-    }catch(e){
+    } catch (e) {
     }
   });
 }
@@ -48,27 +48,37 @@ function addTask() {
     (option) => option.value
   );
 
-  if (task !== "" && selectedStudents.length > 0) {
-    var newTask = {
-      task: task,
-      studentIds: selectedStudents,
-    };
-    tasks.push(newTask);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    selectedStudents.forEach((studentId) => {
-      var student = students.find((s) => s.id === studentId);
-      if (student) {
-        if (!student.tasks) {
-          student.tasks = [];
-        }
-        student.tasks.push(newTask);
+  Swal.fire({
+    title: 'Are you sure you want to add this task?',
+    showDenyButton: true,
+    confirmButtonText: `Add`,
+    denyButtonText: `Cancel`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (task !== "" && selectedStudents.length > 0) {
+        tasks.push({
+          task: task,
+          studentIds: selectedStudents,
+          deleted: false,
+        });
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        selectedStudents.forEach((studentId) => {
+          var student = students.find((s) => s.id === studentId);
+          if (student) {
+            student.tasks.push({ task: task });
+          }
+        });
+        localStorage.setItem("students", JSON.stringify(students));
+        loadTasks();
+        taskInput.value = "";
+        studentInput.value = "";
+      } else {
+        Swal.fire('Task name and assigned students cannot be empty.', '', 'error')
       }
-    });
-    localStorage.setItem("students", JSON.stringify(students));
-    taskInput.value = "";
-    studentInput.selectedIndex = -1;
-    loadTasks();
-  }
+    } else if (result.isDenied) {
+      Swal.fire('Changes are not saved', '', 'info')
+    }
+  })
 }
 loadTasks();
 function loadTasks() {
@@ -76,6 +86,7 @@ function loadTasks() {
   taskList.innerHTML = "";
 
   tasks.forEach(function (task) {
+    if (task.deleted) return;
     var taskItem = document.createElement("li");
     taskItem.classList.add("task-item");
 
@@ -104,26 +115,36 @@ function getStudentNames(studentIds) {
   return names.join(", ");
 }
 function deleteTask(taskIndex) {
-  if (confirm("Are you sure you want to delete this task?")) {
-    var deletedTask = tasks[taskIndex];
-    tasks.splice(taskIndex, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    deletedTask.studentIds.forEach((studentId) => {
-      var student = students.find((s) => s.id === studentId);
-      if (student) {
-        var taskIndex = student.tasks.findIndex(
-          (task) => task.task === deletedTask.task
-        );
-        if (taskIndex !== -1) {
-          student.tasks.splice(taskIndex, 1);
-        }
-      }
-    });
 
-    localStorage.setItem("students", JSON.stringify(students));
-    loadTasks();
-    closeDetailsPopup();
-  }
+  Swal.fire({
+    title: 'Are you sure you want to delete this task?',
+    showDenyButton: true,
+    confirmButtonText: `Delete`,
+    denyButtonText: `Cancel`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      var deletedTask = tasks[taskIndex];
+      tasks[taskIndex].deleted = true;
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+      deletedTask.studentIds.forEach((studentId) => {
+        var student = students.find((s) => s.id === studentId);
+        if (student) {
+          var taskIndex = student.tasks.findIndex(
+            (task) => task.task === deletedTask.task
+          );
+          if (taskIndex !== -1) {
+            student.tasks.splice(taskIndex, 1);
+          }
+
+          localStorage.setItem("students", JSON.stringify(students));
+          loadTasks();
+          closeDetailsPopup();
+        }
+      });
+    } else if (result.isDenied) {
+      Swal.fire('Changes are not saved', '', 'info')
+    }
+  })
 }
 
 function showTaskDetails(taskIndex) {
@@ -134,12 +155,11 @@ function showTaskDetails(taskIndex) {
   var task = tasks[taskIndex];
   var studentIds = task.studentIds;
 
-  if(registerd_user.role != general.roles.admin){
+  if (registerd_user.role != general.roles.admin) {
     detailsContent.innerHTML = `
     <h2>Task Details</h2>
     <div class="taskEdit">
-      <p><strong>Task:</strong> <input type="text" id="editTaskName" value="${
-        task.task
+      <p><strong>Task:</strong> <input type="text" id="editTaskName" value="${task.task
       }"></p>  
       <p><strong>Assigned Students:</strong></p>
       <select id="editStudentNames" multiple>
@@ -151,12 +171,11 @@ function showTaskDetails(taskIndex) {
       <button class="deleteBtn">Delete Task</button>
     </div>
   `
-    }else{
+  } else {
     detailsContent.innerHTML = `
     <h2>Task Details</h2>
     <div class="taskEdit">
-      <p><strong>Task:</strong> <input type="text" id="editTaskName" value="${
-        task.task
+      <p><strong>Task:</strong> <input type="text" id="editTaskName" value="${task.task
       }"></p>  
       <p><strong>Assigned Students:</strong></p>
       <select id="editStudentNames" multiple>
@@ -166,18 +185,18 @@ function showTaskDetails(taskIndex) {
   `;
   }
 
-  if(registerd_user.role != general.roles.admin){
-  var saveBtn = detailsContent.querySelector(".saveBtn");
-  var deleteBtn = detailsContent.querySelector(".deleteBtn");
+  if (registerd_user.role != general.roles.admin) {
+    var saveBtn = detailsContent.querySelector(".saveBtn");
+    var deleteBtn = detailsContent.querySelector(".deleteBtn");
 
-  saveBtn.addEventListener("click", function () {
-    saveTaskChanges(taskIndex);
-  });
+    saveBtn.addEventListener("click", function () {
+      saveTaskChanges(taskIndex);
+    });
 
-  deleteBtn.addEventListener("click", function () {
-    deleteTask(taskIndex);
-  });
-}
+    deleteBtn.addEventListener("click", function () {
+      deleteTask(taskIndex);
+    });
+  }
 
   detailsPopup.style.display = "block";
   overlay.classList.add("active");
@@ -188,8 +207,7 @@ function generateStudentOptions(selectedStudents) {
   return students
     .map(
       (student) =>
-        `<option value="${student.id}" ${
-          selectedStudents.includes(student.id) ? "selected" : ""
+        `<option value="${student.id}" ${selectedStudents.includes(student.id) ? "selected" : ""
         }>${student.firstName} ${student.lastName}</option>`
     )
     .join("");
@@ -201,15 +219,27 @@ function saveTaskChanges(taskIndex) {
     document.getElementById("editStudentNames").selectedOptions
   ).map((option) => option.value);
 
-  if (editTaskName.trim() !== "" && editStudentNames.length > 0) {
-    tasks[taskIndex].task = editTaskName;
-    tasks[taskIndex].studentIds = editStudentNames;
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    loadTasks();
-    closeDetailsPopup();
-  } else {
-    alert("Task name and assigned students cannot be empty.");
-  }
+  Swal.fire({
+    title: 'Are you sure you want to save changes?',
+    showDenyButton: true,
+    confirmButtonText: `Save`,
+    denyButtonText: `Cancel`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (editTaskName.trim() !== "" && editStudentNames.length > 0) {
+        tasks[taskIndex].task = editTaskName;
+        tasks[taskIndex].studentIds = editStudentNames;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        loadTasks();
+        closeDetailsPopup();
+      }
+    } else if (result.isDenied) {
+      Swal.fire('Changes are not saved', '', 'info')
+    }
+  })
+
+
+
 }
 
 function closeDetailsPopup() {
@@ -231,6 +261,6 @@ loadTasks();
 
 // disable add, edit, delete todo buttons for admin
 if (registerd_user.role == general.roles.admin) {
-  document.querySelector('.tasks-input-row').style.display = "none";   
+  document.querySelector('.tasks-input-row').style.display = "none";
 
 }

@@ -1,7 +1,7 @@
 import { Announcement, Student, User } from "./models/models.js";
 import { general } from "./general.js";
 
-
+  
 
 let registerd_user;
 function LoadData() {
@@ -10,7 +10,7 @@ function LoadData() {
     general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
     general.news = general.ReadJson('../data/news.json') || [];
     general.todos = JSON.parse(general.ReadFromlocalStorage(general.keysObj.todos)) || [];
-    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+    registerd_user = JSON.parse(sessionStorage.getItem('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
 }
 LoadData();
 
@@ -242,7 +242,11 @@ registerBtn.addEventListener('click', (e) => {
         const ru = new User(Number(largerID) + 1, role, firstName, lastName, email, password, birthDate, new Date(), imageUrl, mobile);
 
         ru.add();
-        alert("User Added Successfully");
+        Swal.fire({
+            title: 'User Added Successfully',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
     }
    
 });

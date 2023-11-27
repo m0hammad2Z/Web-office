@@ -9,7 +9,7 @@ function LoadData() {
     general.students = JSON.parse(general.ReadFromlocalStorage(general.keysObj.students)) || [];
     general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
     general.news = general.ReadJson('../data/news.json') || [];
-    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+    registerd_user = JSON.parse(sessionStorage.getItem('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
 }
 LoadData();
 
@@ -21,7 +21,7 @@ general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], re
 // Make Student Card that contains student name, feedback title, feedback description and delete button.
 const studentsCards = document.querySelector('.students-cards');
 function MakeStudentCard(id, student, title, description) {
-    
+
     let studentCard = document.createElement('tr');
 
     studentCard.setAttribute('feedbackID', id);
@@ -46,8 +46,8 @@ function MakeStudentCard(id, student, title, description) {
     studentDeleteBtn.setAttribute('id', 'deleteFeedbackBtn');
     studentDeleteBtn.innerHTML = "Delete Feedback";
     studentDeleteTD.appendChild(studentDeleteBtn);
-    if(registerd_user.role == general.roles.trainer){
-    studentCard.appendChild(studentDeleteTD);
+    if (registerd_user.role == general.roles.trainer) {
+        studentCard.appendChild(studentDeleteTD);
     }
 
 
@@ -61,6 +61,7 @@ function MakeStudentCard(id, student, title, description) {
 }
 // list all feedbacks
 for (let feedback of general.feedbacks) {
+    if (feedback.deleted) continue;
     let student = general.students.find((obj) => obj.id == feedback.student_id);
     MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
 }
@@ -68,14 +69,14 @@ for (let feedback of general.feedbacks) {
 document.getElementById('searchInput').addEventListener('keyup', function (e) {
     let searchStr = e.target.value;
     studentsCards.innerHTML = "";
-    if(studentsCards){
-    for (let feedback of general.feedbacks) {
-        general.searchByName(searchStr, general.students).forEach(function (student) {
-            if (feedback.student_id == student.id) {
-                MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
-            }
-        });
-    }
+    if (studentsCards) {
+        for (let feedback of general.feedbacks) {
+            general.searchByName(searchStr, general.students).forEach(function (student) {
+                if (feedback.student_id == student.id) {
+                    MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
+                }
+            });
+        }
     }
 });
 
@@ -111,33 +112,59 @@ function closeModal() {
 // add feedback
 submitBtn.addEventListener('click', function (e) {
     e.preventDefault();
-    let student_id = studentList.value;
-    let title = document.getElementById('feedbackTitle').value;
-    let description = document.getElementById('feedbackDesc').value;
-    let createdBy = registerd_user.id;
-
-    let largerID;
     try {
-        largerID = general.feedbacks.reduce((prev, current) => (prev.id > current.id) ? prev : current).id;
-    } catch (error) {
-        largerID = 0;
+        Swal.fire({
+            title: 'Are you sure you want to add this feedback?',
+            icon: 'question',
+            confirmButtonText: 'Yes',
+            showCancelButton: true,
+        }).then((result) => {
+            if(result.isConfirmed){
+                let student_id = studentList.value;
+                let title = document.getElementById('feedbackTitle').value;
+                let description = document.getElementById('feedbackDesc').value;
+                let createdBy = registerd_user.id;
+
+                let largerID;
+                try {
+                    largerID = general.feedbacks.reduce((prev, current) => (prev.id > current.id) ? prev : current).id;
+                } catch (error) {
+                    largerID = 0;
+                }
+
+                let feedback = new Feedback(Number(largerID) + 1, student_id, title, description, createdBy);
+                feedback.add();
+
+                let student = general.students.find((obj) => obj.id == feedback.student_id);
+                student.feedbacks.push(feedback.id);
+                let std = new Student(student.id, student.firstName, student.lastName, student.email, student.password, student.birthDate, student.team_leader_id, student.mobile, student.imgUrl, student.rate, student.absence, student.doneTasks, student.tasks, student.feedbacks);
+                std.update();
+
+                Swal.fire({
+                    title: 'Feedback added successfully',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                }).then(() => {
+                    MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
+                    closeModal();
+                });
+            }
+        })
+    } catch(error) {
+        Swal.fire({
+            title: 'Error',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+        });
+
     }
-
-    let feedback = new Feedback(Number(largerID) + 1, student_id, title, description, createdBy);
-    feedback.add();
-
-    let student = general.students.find((obj) => obj.id == feedback.student_id);
-    student.feedbacks.push(feedback.id);
-    let std = new Student(student.id, student.firstName, student.lastName, student.email, student.password, student.birthDate, student.team_leader_id, student.mobile, student.imgUrl, student.rate, student.absence, student.doneTasks, student.tasks, student.feedbacks);
-    std.update();
-    MakeStudentCard(feedback.id, student, feedback.title, feedback.description)
-    closeModal();
 });
 
 
 
 // delete add, edit, delete buttons for admin
-if(registerd_user.role == general.roles.admin){
+if (registerd_user.role == general.roles.admin) {
     document.getElementById("addFeedbackBtn").style.display = "none";
     document.querySelector(".delete-btn-form").style.display = "none";
 

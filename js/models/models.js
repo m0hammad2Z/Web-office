@@ -22,6 +22,7 @@ export function User(
   this.birthDate = birthDate;
   this.imgURl = imgURl;
   this.mobile = mobile;
+  this.deleted = false;
 
   this.add = function () {
     let index = general.users.findIndex((o)=>this.id==o.id)
@@ -36,7 +37,7 @@ export function User(
   this.delete = function () {
     let index = general.users.findIndex((user) => user.id == this.id);
     if(index == -1) return;
-    general.users.splice(index, 1);
+    general.users[index].deleted = true;
     general.WriteOnlocalStorage(
       general.keysObj.users,
       JSON.stringify(general.users)
@@ -60,6 +61,7 @@ export function Feedback(id, student_id, title, description, createdBy) {
   this.title = title;
   this.description = description;
   this.createdBy = createdBy;
+  this.deleted = false;
 
   this.add = function () {
     let index = general.feedbacks.findIndex((o)=>this.id==o.id)
@@ -76,7 +78,7 @@ export function Feedback(id, student_id, title, description, createdBy) {
       (feedback) => feedback.id == this.id
     );
     if(index == -1) return;
-    general.feedbacks.splice(index, 1);
+    general.feedbacks[index].deleted = true;
     general.WriteOnlocalStorage(
       general.keysObj.feedbacks,
       JSON.stringify(general.feedbacks)
@@ -126,6 +128,7 @@ export function Student(
   this.doneTasks = parseInt(doneTasks, 10) || 0;
   this.tasks = tasks;
   this.feedbacks = feedbacks;
+  this.deleted = false;
 
   this.add = function () {
     let index = general.students.findIndex((o)=>this.id==o.id)
@@ -140,7 +143,7 @@ export function Student(
   this.delete = function () {
     let index = general.students.findIndex((student) => student.id == this.id);
     if(index == -1) return;
-    general.students.splice(index, 1);
+    general.students[index].deleted = true;
     general.WriteOnlocalStorage(
       general.keysObj.students,
       JSON.stringify(general.students)
@@ -163,6 +166,7 @@ export function Announcement(id, title, description, createdBy) {
   this.title = title;
   this.description = description;
   this.createdBy = createdBy;
+  this.deleted = false;
 
   this.add = function () {
     let index = general.users.findIndex((o)=>this.id==o.id)
@@ -179,7 +183,7 @@ export function Announcement(id, title, description, createdBy) {
       (announcement) => announcement.id == this.id
     );
     if(index == -1) return;
-    general.announcements.splice(index, 1);
+    general.announcements[index].deleted = true;
     general.WriteOnlocalStorage(
       general.keysObj.announcements,
       JSON.stringify(general.announcements)

@@ -59,28 +59,29 @@ function SetSomeDataIfThereIsNo() {
     user.add();
     WriteOnlocalStorage(keysObj.users, JSON.stringify(users));
   }
+
   if (!localStorage.getItem(keysObj.announcements)) {
     for (let i = 1; i <= 4; i++) {
       let announcement = new Announcement(i, "Title", "Description", 1);
       announcement.add();
     }
-    if(!localStorage.getItem(keysObj.feedbacks)){
-        feedbacks =[];
-    }
-    if(!localStorage.getItem(keysObj.news)){
-        WriteOnlocalStorage(keysObj.news, JSON.stringify(news));
+    WriteOnlocalStorage(keysObj.announcements, JSON.stringify(announcements));
+  }
 
-    }
+  if (!localStorage.getItem(keysObj.feedbacks)) {
+    feedbacks = [];
     WriteOnlocalStorage(keysObj.feedbacks, JSON.stringify(feedbacks));
   }
+
   if (!localStorage.getItem(keysObj.students)) {
     WriteOnlocalStorage(keysObj.students, JSON.stringify(students));
   }
 
-  if(!localStorage.getItem(keysObj.tasks)){
+  if (!localStorage.getItem(keysObj.tasks)) {
     WriteOnlocalStorage(keysObj.tasks, JSON.stringify(tasks))
   }
 }
+
 
 function RedirectIfNotAuthorized(rolesAllowed, registerd_user, path) {
   for (let role of rolesAllowed) {
@@ -91,10 +92,11 @@ function RedirectIfNotAuthorized(rolesAllowed, registerd_user, path) {
   window.location.href = path;
 }
 
-function searchByName(name, arr) {
+function searchByName(str, arr) {
   let result = [];
   for (let item of arr) {
-    if (item.firstName.toLowerCase().includes(name.toLowerCase())) {
+    let fullName = item.firstName + " " + item.lastName;
+    if (item.firstName.toLowerCase().includes(str.toLowerCase()) || item.lastName.toLowerCase().includes(str.toLowerCase()) || fullName.toLowerCase().includes(str.toLowerCase())) {
       result.push(item);
     }
   }

@@ -12,11 +12,11 @@ function LoadData() {
     general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
     general.news = general.ReadJson('../data/news.json') || [];
     general.todos = JSON.parse(general.ReadFromlocalStorage(general.keysObj.todos)) || [];
-    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+    registerd_user = JSON.parse(sessionStorage.getItem('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
 }
 LoadData();
 
-
+console.log(general.students);
 general.RedirectIfNotAuthorized([general.roles.admin, general.roles.trainer], registerd_user,'../html/login.html')
 
 
@@ -52,29 +52,49 @@ function MakeStatisticCard(innerHTML) {
 function MakeStatisticCards() {
     MakeStatisticCard(`<div class="left">
     <h3><i class="fas fa-users"></i>Number of Students</h3>
-    <h1>${general.students.length}</h1>
+    <h1>${general.students.filter((std)=>{
+        return std.deleted == false;
+    }).length}</h1>
 </div>
 <div class="right">
     <div id="progress">
-        <div id="bar" style="width: ${general.students.length}%;"></div>
+        <div id="bar" style="width: ${general.students.filter((std)=>{
+            return std.deleted == false;
+        }).length}%;"></div>
       </div>
 </div>`)
     MakeStatisticCard(`<div class="left">
     <h3><i class="fas fa-chalkboard-teacher"></i>Number of Trainers</h3>
-    <h1>${general.users.filter(obj=>obj.role == general.roles.trainer).length}</h1>
+    <h1>${general.users.filter(obj=>{
+        if(obj.role == general.roles.trainer && obj.deleted ==false){
+            return obj;
+        }
+    }).length}</h1>
 </div>
 <div class="right">
     <div id="progress">
-        <div id="bar" style="width: ${general.users.filter(obj=>obj.role == general.roles.trainer).length}%;"></div>
+        <div id="bar" style="width: ${general.users.filter(obj=>{
+            if(obj.role == general.roles.trainer && obj.deleted ==false){
+                return obj;
+            }
+        }).length}%;"></div>
       </div>
 </div>`)
     MakeStatisticCard(`<div class="left">
     <h3><i class="fas fa-crown"></i>Number of Leaders</h3>
-    <h1>${general.users.filter(obj=>obj.role == general.roles.admin).length}</h1>
+    <h1>${general.users.filter(obj=>{
+        if(obj.role == general.roles.admin && obj.deleted ==false){
+            return obj;
+        }
+    }).length}</h1>
 </div>
 <div class="right">
     <div id="progress">
-        <div id="bar" style="width: ${general.users.filter(obj=>obj.role == general.roles.admin).length}%;"></div>
+        <div id="bar" style="width: ${general.users.filter(obj=>{
+            if(obj.role == general.roles.admin && obj.deleted ==false){
+                return obj;
+            }
+        }).length}%;"></div>
       </div>
 </div>`)
 }

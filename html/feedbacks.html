@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/seidebar.css">
     <link rel="stylesheet" href="../css/feedbacks.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 
@@ -17,15 +18,18 @@
 
         <div class="students">
             <div class="students-Container">
+
                 <div class="students-Containert-Header">
                     <h1>Feedbacks</h1>
-                    <div class="search-container">
-                        <input type="text" id="searchInput" placeholder="Search...">
-                    </div>
                     <button class="btn" id="addFeedbackBtn">Add Feedback</button>
                 </div>
 
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search...">
+                </div>
+
                 <div class="table-Container">
+                    
                     <table>
                         <thead>
                             <tr>
@@ -49,7 +53,7 @@
                 <form id="feedbackForm">
                     <label for="studentSelect">Select Student:</label>
                     <select id="studentSelect" required>
-                        <option value="">Select Student</option>
+                        
                     </select>
 
                     <br>

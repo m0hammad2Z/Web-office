@@ -14,7 +14,7 @@ function LoadData() {
   general.todos =
     JSON.parse(general.ReadFromlocalStorage(general.keysObj.todos)) || [];
   registerd_user =
-    JSON.parse(general.ReadFromlocalStorage("registerd_user")) ||
+    JSON.parse(sessionStorage.getItem('registerd_user')) ||
     new User(
       -1,
       general.roles.guest,
@@ -64,7 +64,7 @@ function addStudent() {
   var birthDate = document.getElementById("birthDate").value;
   var mobile = document.getElementById("mobile").value;
   var imgUrl = document.getElementById("imgUrl").value;
-  var registeredUser = JSON.parse(localStorage.getItem("registerd_user")) || {};
+  var registeredUser = JSON.parse(sessionStorage.getItem('registerd_user')) || {};
   var teamLeaderId = registeredUser.id;
 
   var newStudent = new Student(
@@ -90,12 +90,27 @@ function addStudent() {
     localStorage.setItem("students", JSON.stringify([]));
   }
 
-  let students = JSON.parse(localStorage.getItem("students"));
-  students.push(newStudent);
-  localStorage.setItem("students", JSON.stringify(students));
-
-  closePopupForm();
-  loadStudentsIntoTable();
+  Swal.fire({
+    title: 'Add Student',
+    text: 'Are you sure you want to add this student?',
+    icon: 'question',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let students = JSON.parse(localStorage.getItem("students"));
+      students.push(newStudent);
+      localStorage.setItem("students", JSON.stringify(students));
+      Swal.fire({
+        title: 'Student added successfully',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      }).then(() => {
+        closePopupForm();
+        loadStudentsIntoTable();
+      });
+    }
+  });
 }
 
 document.getElementById('searchInput').addEventListener('keyup', function (e) {
@@ -113,55 +128,42 @@ function loadStudentsIntoTable() {
   var tableBody = document.querySelector("table tbody");
   tableBody.innerHTML = "";
   students.forEach(function (student) {
+    if (student.deleted) return;
     var row = tableBody.insertRow();
-    if(registerd_user.role == general.roles.admin){
+    if (registerd_user.role == general.roles.admin) {
       row.innerHTML = `
       <td>${student.firstName} ${student.lastName}</td>
-      <td>${
-        student.rate ? student.rate : 0
-      }/100&nbsp; <button class="rateBtn plusBtn" data-student-id="${
-        student.id
-      }">+</button></td>
-      <td>${
-        student.absence ? student.absence : 0
-      }&nbsp;&nbsp; <button class="addAbsenceBtn plusBtn" data-student-id="${
-        student.id
-      }">+</button></td>
-      <td>${
-        student.doneTasks ? student.doneTasks : 0
-      }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${
-        student.id
-      }">+</button></td>
+      <td>${student.rate ? student.rate : 0
+        }/100&nbsp; <button class="rateBtn plusBtn" data-student-id="${student.id
+        }">+</button></td>
+      <td>${student.absence ? student.absence : 0
+        }&nbsp;&nbsp; <button class="addAbsenceBtn plusBtn" data-student-id="${student.id
+        }">+</button></td>
+      <td>${student.doneTasks ? student.doneTasks : 0
+        }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${student.id
+        }">+</button></td>
       <td>${student.tasks.length ? student.tasks.length : "No Tasks"}</td>
       <td>${student.feedbacks.length ? student.feedbacks.length : "No Feedbacks"}</td> `;
-    }else if (registerd_user.role == general.roles.trainer) {
+    } else if (registerd_user.role == general.roles.trainer) {
       row.innerHTML = `
       <td>${student.firstName} ${student.lastName}</td>
-      <td>${
-        student.rate ? student.rate : 0
-      }/100&nbsp; <button class="rateBtn plusBtn" data-student-id="${
-        student.id
-      }">+</button></td>
-      <td>${
-        student.absence ? student.absence : 0
-      }&nbsp;&nbsp; <button class="addAbsenceBtn plusBtn" data-student-id="${
-        student.id
-      }">+</button></td>
-      <td>${
-        student.doneTasks ? student.doneTasks : 0
-      }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${
-        student.id
-      }">+</button></td>
+      <td>${student.rate ? student.rate : 0
+        }/100&nbsp; <button class="rateBtn plusBtn" data-student-id="${student.id
+        }">+</button></td>
+      <td>${student.absence ? student.absence : 0
+        }&nbsp;&nbsp; <button class="addAbsenceBtn plusBtn" data-student-id="${student.id
+        }">+</button></td>
+      <td>${student.doneTasks ? student.doneTasks : 0
+        }&nbsp;&nbsp; <button class="addDoneTaskBtn plusBtn" data-student-id="${student.id
+        }">+</button></td>
       <td>${student.tasks.length ? student.tasks.length : "No Tasks"}</td>
       <td>${student.feedbacks.length ? student.feedbacks.length : "No Feedbacks"}</td>
   
-      <td><button class="editBtn" data-student-id="${
-        student.id
-      }">Edit</button></td>
-      <td><button class="deleteBtn" data-student-id="${
-        student.id
-      }">Delete</button>`;
-      
+      <td><button class="editBtn" data-student-id="${student.id
+        }">Edit</button></td>
+      <td><button class="deleteBtn" data-student-id="${student.id
+        }">Delete</button>`;
+
     }
 
   });
@@ -194,17 +196,38 @@ function editStudent(studentId) {
   document
     .getElementById("addStudentBtn")
     .addEventListener("click", function () {
-      studentToEdit.firstName = document.getElementById("firstName").value;
-      studentToEdit.lastName = document.getElementById("lastName").value;
-      studentToEdit.email = document.getElementById("email").value;
-      studentToEdit.password = document.getElementById("password").value;
-      studentToEdit.birthDate = document.getElementById("birthDate").value;
-      studentToEdit.mobile = document.getElementById("mobile").value;
-      studentToEdit.imgUrl = document.getElementById("imgUrl").value;
-      localStorage.setItem("students", JSON.stringify(students));
-      closePopupForm();
-      location.reload();
-      loadStudentsIntoTable();
+
+
+
+
+
+      Swal.fire({
+        title: 'Edit Student',
+        text: 'Are you sure you want to make changes to this student data?',
+        icon: 'question',
+        confirmButtonText: 'OK',
+        showCancelButton: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          studentToEdit.firstName = document.getElementById("firstName").value;
+          studentToEdit.lastName = document.getElementById("lastName").value;
+          studentToEdit.email = document.getElementById("email").value;
+          studentToEdit.password = document.getElementById("password").value;
+          studentToEdit.birthDate = document.getElementById("birthDate").value;
+          studentToEdit.mobile = document.getElementById("mobile").value;
+          studentToEdit.imgUrl = document.getElementById("imgUrl").value;
+          localStorage.setItem("students", JSON.stringify(students));
+          Swal.fire({
+            title: 'Student edited successfully',
+            icon: 'success',
+            confirmButtonText: 'Yes',
+          }).then(() => {
+            closePopupForm();
+            location.reload();
+            loadStudentsIntoTable();
+          });
+        }
+      });
     });
 }
 
@@ -212,9 +235,30 @@ function deleteStudent(studentId) {
   var students = JSON.parse(localStorage.getItem("students")) || [];
   var studentIndex = students.findIndex((student) => student.id === studentId);
   if (studentIndex !== -1) {
-    students.splice(studentIndex, 1);
-    localStorage.setItem("students", JSON.stringify(students));
-    loadStudentsIntoTable();
+    Swal.fire({
+      title: 'Are you sure you want to delete this student?',
+      icon: 'question',
+      confirmButtonText: 'Yes',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        students[studentIndex].deleted = true;
+        localStorage.setItem("students", JSON.stringify(students));
+        Swal.fire({
+          title: 'Student deleted successfully',
+          icon: 'success',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          loadStudentsIntoTable();
+        });
+      }
+    });
+  }else{
+    Swal.fire({
+      title: 'Error',
+      icon: 'error',
+      confirmButtonText: 'OK',
+    });
   }
 }
 function addAbsence(studentId) {

@@ -202,3 +202,26 @@ tr:hover {
 .overlay.active {
   display: block;
 }
+
+.search-container{
+
+  margin-bottom: 5em;
+}
+
+
+#searchInput{
+  width: 100%;
+  padding: 0.5em 1em;
+  font-size: 2em;
+  border-radius: 1em;
+  background-color: var(--second-bg-color);
+  color: var(--text-color);
+}
+
+#searchInput:focus{
+  outline: none;
+  border: 1px solid var(--main-color);
+}
+
+
+

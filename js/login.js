@@ -11,7 +11,7 @@ function LoadData() {
     general.announcements = JSON.parse(general.ReadFromlocalStorage(general.keysObj.announcements)) || [];
     general.news = general.ReadJson('../data/news.json') || [];
     general.tasks = JSON.parse(general.ReadFromlocalStorage(general.keysObj.tasks)) || [];
-    registerd_user = JSON.parse(general.ReadFromlocalStorage('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
+    registerd_user = JSON.parse(sessionStorage.getItem('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
 }
 LoadData();
 
@@ -29,7 +29,7 @@ loginForm.addEventListener('submit', function (event) {
 
     if (user) {
         window.location.href = `welcome.html`;
-        general.WriteOnlocalStorage('registerd_user',JSON.stringify(user));
+        sessionStorage.setItem('registerd_user', JSON.stringify(user));
 
     } else {
         alert('Invalid credentials');

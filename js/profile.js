@@ -5,7 +5,6 @@ import { general } from "./general.js";
 document
   .querySelector(".saveChangesButton")
   .addEventListener("click", function () {
-    console.log("test");
     let firstName = document.getElementById("userFirstNameInput").value;
     let lastName = document.getElementById("userLastNameInput").value;
     let email = document.getElementById("userEmailInput").value;
@@ -25,16 +24,33 @@ document
       image,  
       registerd_user.mobile
     );
-    location.reload();
-    const isConfirmed = window.confirm(
-      "Are you sure you want to save changes?"
-    );
-    if (isConfirmed) {
-      user.update();
-      general.WriteOnlocalStorage("registerd_user", JSON.stringify(user));
-      document.getElementById("UserProfileForm").style.display = "none";
-      LoadData1();
-    }
+
+    Swal.fire({
+      title: 'Are you sure you want to save changes?',
+      icon: 'question',
+      confirmButtonText: 'OK',
+      showCancelButton: true,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        try{
+          user.update();
+          sessionStorage.setItem("registerd_user", JSON.stringify(user));
+          Swal.fire({
+            title: 'Changes saved successfully',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          }).then(()=>{
+            location.reload();
+          });
+        }catch{
+          Swal.fire({
+            title: 'Error',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+        }
+      }
+    });
   });
 
 let registerd_user;
@@ -42,7 +58,7 @@ function LoadData() {
   general.users =
     JSON.parse(general.ReadFromlocalStorage(general.keysObj.users)) || [];
   registerd_user =
-    JSON.parse(general.ReadFromlocalStorage("registerd_user")) ||
+  JSON.parse(sessionStorage.getItem('registerd_user')) ||
     new User(
       -1,
       general.roles.guest,
