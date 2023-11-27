@@ -11,59 +11,79 @@ function LoadData() {
     registerd_user = JSON.parse(sessionStorage.getItem('registerd_user')) || new User(-1, general.roles.guest, "Guest", "", "", "", new Date(), new Date(), "", "");
 }
 LoadData();
-
-
 general.RedirectIfNotAuthorized([general.roles.admin], registerd_user, '../html/welcome.html');
+
+
 
 
 //retrieve trainers name from local storage(users array)
 let trainers = general.users.filter(user => user.role === general.roles.trainer);
 function trainerName() {
-   
 
     return trainers.map(trainer => `${trainer.firstName} ${trainer.lastName}`);
+}
 
-  }
-  
 
-  function deleteSpecificTrainer(trainerId) {
+
+function deleteSpecificTrainer(trainerId) {
     const index = general.users.findIndex(trainer => trainer.id === trainerId);
     if (index !== -1) {
         general.users.splice(index, 1);
-        general.WriteOnlocalStorage(general.keysObj.users, JSON.stringify(general.users));   
+        general.WriteOnlocalStorage(general.keysObj.users, JSON.stringify(general.users));
         location.reload();
     }
 }
 
-  //appear it in the trainers table
-  function trainersTable() {
+//appear triner name in the trainers table
+function trainersTable() {
     let allrTrainerNames = trainerName();
     var tableBody = document.querySelector("table tbody");
-    tableBody.innerHTML = "";
-    allrTrainerNames.forEach(function (trainerName,idx) {
+    allrTrainerNames.forEach(function (trainerName, idx) {
         let row = tableBody.insertRow();
         let speccifyTrainer = trainers[idx];//connect each trainer name with his id 
-      row.innerHTML = `<td>${trainerName}</td>
+        row.innerHTML = `<td>${trainerName}</td>
       <td><button class="editBtn" data-trainer-id="${speccifyTrainer.id
-      }">Edit</button></td>
+            }">Edit</button></td>
     <td><button class="deleteBtn" data-trainer-id="${speccifyTrainer.id
-      }">Delete</button> `;
-        
-      row.querySelector(".deleteBtn").addEventListener("click", function () {
-        let trainerId = parseInt(this.getAttribute("data-trainer-id"));
-        deleteSpecificTrainer(trainerId);
-      });
-        
+            }">Delete</button> `;
+
+
+
+        //delete trainer
+        row.querySelector(".deleteBtn").addEventListener("click", function () {
+            Swal.fire({
+                title: 'Delete Trainer',
+                text: 'Are you sure you want to delete this trainer info?',
+                icon: 'question',
+                confirmButtonText: 'OK',
+                showCancelButton: true,
+            }).then((result) => {
+            
+                if (result.isConfirmed) {
+                    let trainerId = parseInt(this.getAttribute("data-trainer-id"));
+                    deleteSpecificTrainer(trainerId);
+                    Swal.fire({
+                        title: 'Student edited successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Yes',
+                    }).then(() => {
+                        location.reload();
+                    });
+                }
+            })
+
+        });
+
     });
-   
-  }
+
+}
 trainersTable();
-  
+
 
 // for search field
 document.getElementById('searchInput').addEventListener('keyup', function (e) {
     trainerTabl();
-  })
+})
 function trainerTabl() {
     let searchStr = document.getElementById('searchInput').value;
     let trainers = general.users.filter(user => user.role === general.roles.trainer) || [];
@@ -88,6 +108,6 @@ function closePopupForm() {
     overlay.classList.remove("active");
     location.reload();
 }
-  
+
 
 
